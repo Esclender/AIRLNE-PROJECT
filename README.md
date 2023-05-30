@@ -1,4 +1,4 @@
-# ![Logo](./public/assets/LOGO__2_-removebg-preview.png)
+# ![Logo](./public/assets/AIRLNE-removebg-preview.png)
 # Welcome to Airlne - An open API for flies info in PERU
 
 | Information |
