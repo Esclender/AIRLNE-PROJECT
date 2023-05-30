@@ -1,1 +1,1 @@
-# ![Logo](./public/assets/LOGO%20(2).png)
+# ![Logo](./public/assets/LOGO__2_-removebg-preview.png)
