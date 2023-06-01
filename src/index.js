@@ -23,17 +23,9 @@ app.use((req, res, next) => {
 
 
 mongoose.connect("mongodb+srv://e00181703:zGju3VAVTcVj8ALA@cluster0.xzeljne.mongodb.net/?retryWrites=true&w=majority", {dbName:"Airlne"})
-  .then(() => console.log(mongoose.Schema("vuelos", mongoose.Schema({
-    name:{
-      type:String,
-      required: true
-    },
-    age:{
-      type:Number,
-      required: true
-    }
-  }))))
+  .then(() => console.log("CONNECTED"))
   .catch((err) => console.log(err))
+
 
 
 app.listen(PORT, (req, resp) => {

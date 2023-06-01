@@ -1,3 +1,5 @@
+import mongoose from "mongoose"
+
 class db {
   constructor(req){
     this.data = req.app.db.data.articulos
@@ -14,7 +16,6 @@ class db {
   post(body){
 
     const newArticle = {
-      id: nanoid(idLenght),
       ...body
     }
 
