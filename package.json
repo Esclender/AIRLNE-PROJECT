@@ -1,0 +1,33 @@
+{
+  "name": "airlne-project",
+  "version": "1.0.0",
+  "description": "| Information |\r |:------------|\r | This API provides a big range of detailed information about all the avaibles flies actually (arriving time, aboarding time, flight fares, differents destinations) |",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon src/index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Esclender/AIRLNE-PROJECT.git"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Esclender/AIRLNE-PROJECT/issues"
+  },
+  "homepage": "https://github.com/Esclender/AIRLNE-PROJECT#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "moongose": "^1.0.0",
+    "morgan": "^1.10.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
