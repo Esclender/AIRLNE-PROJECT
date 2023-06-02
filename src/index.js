@@ -2,8 +2,8 @@ import express from "express"
 import cors from "cors"
 import morgan from "morgan";
 import mongoose from "mongoose"
-//import router from "./src/routes/articles.js"
-//import swaggerDocsV1 from "./src/routes/swagger.js";
+import hotelesRoutes from "./routes/hotelReserva.js"
+import swaggerDocsV1 from "./swagger.js";
 
 const PORT = process.env.PORT || 10801;
 const app = express()
@@ -19,15 +19,23 @@ app.use((req, res, next) => {
   next();
 });
 
+//Routes
+app.use("/hotel",hotelesRoutes)
+
 
 
 
 mongoose.connect("mongodb+srv://e00181703:zGju3VAVTcVj8ALA@cluster0.xzeljne.mongodb.net/?retryWrites=true&w=majority", {dbName:"Airlne"})
+<<<<<<< HEAD
   .then(() => console.log("CONNECTED"))
+=======
+  .then(() => console.log("Connected" ))
+>>>>>>> feature/hotelesReserva
   .catch((err) => console.log(err))
 
 
 
 app.listen(PORT, (req, resp) => {
   console.log(`Server running in port http://localhost:${PORT}`)
+  swaggerDocsV1(app,PORT)
 })

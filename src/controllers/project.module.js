@@ -1,41 +1,54 @@
 import mongoose from "mongoose"
 
 class db {
-  constructor(req){
-    this.data = req.app.db.data.articulos
+  constructor(sche){
+    this.data = sche
   }
 
-  get(id){
+  async get(id){
     if(id != null){
-      return this.data.find(articulo => articulo.id == id)
+      return null
     }else{
-      return this.data
+      const data = await this.data.find({})
+      return data
     }
   }
 
   post(body){
+    const newReserva = this.data(body)
+    
+    return newReserva.save()
 
+<<<<<<< HEAD
     const newArticle = {
       ...body
     }
 
     this.data.push(newArticle)
+=======
+>>>>>>> feature/hotelesReserva
   }
 
   put(id,body){
-    const articulo = this.get(id)
-    const index = this.data.findIndex(art => art.id == id)
+    const updateReserva = this.data.updateOne(
+      {
+        "_id":`${id}`
+      },
+      {
+          "$set": {
+              ...body
+          }
+      }
+    )
 
-    this.data[index] = {
-      ...articulo,
-      ...body
-    }
-
+    return updateReserva
   }
 
-  delete(id, req){
-    req.app.db.data.articulos = this.data.filter(art => art.id != id)
-    this.data = req.app.db.data.articulos
+  delete(id){
+    const deletedOne = this.data.deleteOne({"_id":`${id}`})
+    return deletedOne
   }
 
 }
+
+export default db
