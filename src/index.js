@@ -26,11 +26,7 @@ app.use("/hotel",hotelesRoutes)
 
 
 mongoose.connect("mongodb+srv://e00181703:zGju3VAVTcVj8ALA@cluster0.xzeljne.mongodb.net/?retryWrites=true&w=majority", {dbName:"Airlne"})
-<<<<<<< HEAD
   .then(() => console.log("CONNECTED"))
-=======
-  .then(() => console.log("Connected" ))
->>>>>>> feature/hotelesReserva
   .catch((err) => console.log(err))
 
 

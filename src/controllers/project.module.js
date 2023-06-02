@@ -18,15 +18,6 @@ class db {
     const newReserva = this.data(body)
     
     return newReserva.save()
-
-<<<<<<< HEAD
-    const newArticle = {
-      ...body
-    }
-
-    this.data.push(newArticle)
-=======
->>>>>>> feature/hotelesReserva
   }
 
   put(id,body){
