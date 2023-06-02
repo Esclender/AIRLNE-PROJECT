@@ -9,26 +9,38 @@ const categoriasVuelosRuter = express.Router()
 /**
 * @openapi
 * tags:
-*  - name: ReservaDeHoteles
-*    description: Endpoints para obtener los hoteles que esten dispnibles para diferentes destinos.
+*  - name: CategoriasDeVuelos
+*    description: Endpoints para obtener las categorias de vuelos que esten dispnibles para diferentes destinos.
 */
 
 /**
  * @openapi
  * components:
  *   schemas:
- *     ReservasHoteles:
+ *     CategoriasDeVuelos:
  *       type: object
  *       properties:
- *         nameHotel: 
+ *         beneficies:
+ *           type: array
+ *           example: [
+ *                       bolso o mochila pequeña,
+ *                       Equipaje de mano 10 kg,
+ *                       1 equipaje bodega 23 kg,
+ *                       Cambio con cargo,
+ *                       Selección de asiento,
+ *                       30 % de devolución,
+ *                       Uso de cupones Upgrade
+ *                       ]
+ *         categoryName:
  *           type: string
- *           example: Hotel Plaza El Bosque Ebro
- *         qualification:
+ *           example: Plus
+ *         price:
  *           type: number
- *           example: 8.8
- *         city:
+ *           example: 250
+ *         currency:
  *           type: string
- *           example: Santiago de chile
+ *           example: USD
+ * 
  */
 
 
@@ -36,31 +48,42 @@ const categoriasVuelosRuter = express.Router()
  * @openapi
  * components:
  *   schemas:
- *     ReservasHotelesRE:
+ *     categoriasVuelosGET:
  *       type: object
  *       properties:
  *         _id: 
  *           type: string
  *           example: 6478b0eaa559cc7884a58952
- *         nameHotel: 
+ *         beneficies:
+ *           type: array
+ *           example: [
+ *                       bolso o mochila pequeña,
+ *                       Equipaje de mano 10 kg,
+ *                       1 equipaje bodega 23 kg,
+ *                       Cambio con cargo,
+ *                       Selección de asiento,
+ *                       30 % de devolución,
+ *                       Uso de cupones Upgrade
+ *                       ]
+ *         categoryName:
  *           type: string
- *           example: Hotel Plaza El Bosque Ebro
- *         qualification:
+ *           example: Plus
+ *         price:
  *           type: number
- *           example: 8.8
- *         city:
+ *           example: 250
+ *         currency:
  *           type: string
- *           example: Santiago de chile
+ *           example: USD
  */
 
 
 /**
  * @openapi
- * /hotel:
+ * /categoriasVuelos:
 *    get:
 *      tags:
-*        - ReservaDeHoteles
-*      summary: Devuelve un array de hoteles
+*        - CategoriasDeVuelos
+*      summary: Devuelve un array de todas las categorías actuales
 *      responses:
 *        '200':
 *          description: successful operation
@@ -69,24 +92,24 @@ const categoriasVuelosRuter = express.Router()
 *              schema:
 *               type: array
 *               items:
-*                    $ref: "#/components/schemas/ReservasHotelesRE"
+*                    $ref: "#/components/schemas/categoriasVuelosGET"
 */
 
 categoriasVuelosRuter.get("/", categoriasVservices.getcategoriasVuelos)
 
 /**
  * @openapi
- * /hotel/reservas:
+ * /categoriasVuelos:
 *    post:
 *      tags:
-*        - ReservaDeHoteles
-*      summary: Crear una reserva de hotel
+*        - CategoriasDeVuelos
+*      summary: Añadir una nueva categoria
 *      requestBody:
-*        description: Los parametros {nombreHotel,calificacion,ciudad} son OBLIGATORIOS
+*        description: Los parametros {beneficies,categoryName,price,currency} son OBLIGATORIOS
 *        content:
 *          application/json:
 *            schema:
-*              $ref: '#/components/schemas/ReservasHoteles'
+*              $ref: '#/components/schemas/CategoriasDeVuelos'
 *        required: true
 *      responses:
 *        '200':
@@ -96,21 +119,21 @@ categoriasVuelosRuter.get("/", categoriasVservices.getcategoriasVuelos)
 *              schema:
 *               type: array
 *               items:
-*                    $ref: "#/components/schemas/ReservasHotelesRE"
+*                    $ref: "#/components/schemas/categoriasVuelosGET"
 */
 categoriasVuelosRuter.post("/", categoriasVservices.postcategoriasVuelos)
 
 
 /**
  * @openapi
- * /hotel/reservas/{id}:
+ * /categoriasVuelos/{id}:
 *    put:
-*      tags:
-*        - ReservaDeHoteles
-*      summary: Actualizar una reserva de hotel.
+*      tags: 
+*        - CategoriasDeVuelos
+*      summary: Actualizar una categoria.
 *      parameters:
 *        - name: id
-*          description: Ingresa el id de la reserva
+*          description: Ingresa el id de la categoria
 *          in: path
 *          required: true
 *          schema:
@@ -120,7 +143,7 @@ categoriasVuelosRuter.post("/", categoriasVservices.postcategoriasVuelos)
 *        content:
 *          application/json:
 *            schema:
-*              $ref: '#/components/schemas/ReservasHoteles'
+*              $ref: '#/components/schemas/CategoriasDeVuelos'
 *        required: true
 *      responses:
 *        '200':
@@ -130,20 +153,20 @@ categoriasVuelosRuter.post("/", categoriasVservices.postcategoriasVuelos)
 *              schema:
 *               type: array
 *               items:
-*                    $ref: "#/components/schemas/ReservasHotelesRE"
+*                    $ref: "#/components/schemas/categoriasVuelosGET"
 */
 categoriasVuelosRuter.put("/:id", categoriasVservices.putcategoriasVuelos)
 
 /**
  * @openapi
- * /hotel/reservas/{id}:
+ * /categoriasVuelos/{id}:
 *    delete:
 *      tags:
-*        - ReservaDeHoteles
-*      summary: Borrar una reserva
+*        - CategoriasDeVuelos
+*      summary: Borrar una categoria de vuelo
 *      parameters:
 *        - name: id
-*          description: Escribe el id de la reserva
+*          description: Escribe el ID de la categoría a escoger
 *          in: path
 *          required: true
 *          schema:
@@ -154,9 +177,7 @@ categoriasVuelosRuter.put("/:id", categoriasVservices.putcategoriasVuelos)
 *          content:
 *            application/json:
 *              schema:
-*               type: array
-*               items:
-*                    $ref: "#/components/schemas/ReservasHotelesRE"
+*                $ref: "#/components/schemas/categoriasVuelosGET"
 */
 categoriasVuelosRuter.delete("/:id", categoriasVservices.deletecategoriasVuelos)
 

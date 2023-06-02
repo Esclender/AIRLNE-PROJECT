@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
 const vueloCategorySchema = mongoose.Schema({
-    type:{
-    type:String,
-    required: true
-  },
   beneficies:{
     type:Array,
     required: true
