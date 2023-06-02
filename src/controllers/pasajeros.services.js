@@ -50,7 +50,7 @@ async function deletepasajero(req,res){
     const id = req.params.id
     const rst = await model.delete(id)
     return await res.json({
-      message:"Cancelaste tu vuelo"
+      message:"El pasajero ha cancelado su vuelo"
     })
 
   } catch (error) {

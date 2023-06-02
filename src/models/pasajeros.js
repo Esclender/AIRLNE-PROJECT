@@ -14,7 +14,7 @@ const pasajeroSchema = mongoose.Schema({
     required: true
   },
   Passport_N:{
-    type:Number,
+    type:String,
     required: true
   },
   Destination:{
