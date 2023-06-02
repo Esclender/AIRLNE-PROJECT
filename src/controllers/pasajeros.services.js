@@ -1,9 +1,9 @@
-import vuelosSchema from "../models/vuelos.js"
+import pasajerosSchema from "../models/pasajeros.js"
 import db from "./project.module.js"
 
-const model = new db(vuelosSchema)
+const model = new db(pasajerosSchema)
 
-async function getvuelos(req,res){
+async function getpasajero(req,res){
   try {
 
     const rst = await model.get()
@@ -16,20 +16,7 @@ async function getvuelos(req,res){
   }
 }
 
-async function getvuelosbyid(req,res){
-  try {
-
-    const rst = await model.get(req.params.id)
-    return await res.json(rst)
-
-  } catch (error) {
-    res.json({
-      message:error
-    })
-  }
-}
-
-async function postvuelos(req,res){
+async function postpasajero(req,res){
   try {
     
     const rst = await model.post(req.body)
@@ -42,12 +29,12 @@ async function postvuelos(req,res){
   }
 }
 
-async function putvuelos(req,res){
+async function putpasajero(req,res){
   try {
     const id = req.params.id
     const rst = await model.put(id,req.body)
     return await res.json({
-      message:"Vuelo Actualizado"
+      message:"Pasajero Actualizado"
     })
 
   } catch (error) {
@@ -58,12 +45,12 @@ async function putvuelos(req,res){
   }
 }
 
-async function deletevuelos(req,res){
+async function deletepasajero(req,res){
   try {
     const id = req.params.id
     const rst = await model.delete(id)
     return await res.json({
-      message:"Vuelo cancelado"
+      message:"El pasajero ha cancelado su vuelo"
     })
 
   } catch (error) {
@@ -75,9 +62,8 @@ async function deletevuelos(req,res){
 }
 
 export default {
-  getvuelos,
-  postvuelos,
-  putvuelos,
-  getvuelosbyid,
-  deletevuelos
+  getpasajero,
+  postpasajero,
+  putpasajero,
+  deletepasajero
 }
