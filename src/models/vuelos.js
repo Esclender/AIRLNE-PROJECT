@@ -1,27 +1,31 @@
 import mongoose from "mongoose";
 
 const vuelosSchema = mongoose.Schema({
-  destino:{
+  destination:{
     type:String,
     required: true
   },
-  origen:{
+  origin:{
     type:String,
     required: true
   },
-  idaYvuelta:{
+  roundtrip:{
     type:Boolean,
     required: true
   },
-  Salida:{
+  exit:{
     type:Date,
     required: true
   },
-  tarifa$:{
+  currency:{
+    type:String,
+    required: true
+  },
+  price:{
     type:Number,
     required: true
   },
-  llegada:{
+  arrival:{
     type:Date,
     required: true
   },

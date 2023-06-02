@@ -20,13 +20,13 @@ const hotelRouter = express.Router()
  *     ReservasHoteles:
  *       type: object
  *       properties:
- *         nombreHotel: 
+ *         nameHotel: 
  *           type: string
  *           example: Hotel Plaza El Bosque Ebro
- *         calificacion:
+ *         qualification:
  *           type: number
  *           example: 8.8
- *         ciudad:
+ *         city:
  *           type: string
  *           example: Santiago de chile
  */
@@ -42,13 +42,13 @@ const hotelRouter = express.Router()
  *         _id: 
  *           type: string
  *           example: 6478b0eaa559cc7884a58952
- *         nombreHotel: 
+ *         nameHotel: 
  *           type: string
  *           example: Hotel Plaza El Bosque Ebro
- *         calificacion:
+ *         qualification:
  *           type: number
  *           example: 8.8
- *         ciudad:
+ *         city:
  *           type: string
  *           example: Santiago de chile
  */
