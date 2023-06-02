@@ -6,6 +6,7 @@ import hotelesRoutes from "./routes/hotelReserva.js"
 import swaggerDocsV1 from "./swagger.js";
 import vuelosRoutes from "./routes/vuelos.js"
 import pasajeroRouter from "./routes/pasajeros.js";
+import vuelosCategories from "./routes/categoriasVuelos.js"
 
 const PORT = process.env.PORT || 10801;
 const app = express()
@@ -25,7 +26,7 @@ app.use((req, res, next) => {
 app.use("/hotel",hotelesRoutes)
 app.use("/vuelos",vuelosRoutes)
 app.use("/pasajero",pasajeroRouter)
-
+app.use("/categoriasVuelos",vuelosCategories)
 
 
 
