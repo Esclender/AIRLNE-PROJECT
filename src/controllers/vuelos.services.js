@@ -16,6 +16,19 @@ async function getvuelos(req,res){
   }
 }
 
+async function getvuelosbyid(req,res){
+  try {
+
+    const rst = await model.get(req.params.id)
+    return await res.json(rst)
+
+  } catch (error) {
+    res.json({
+      message:error
+    })
+  }
+}
+
 async function postvuelos(req,res){
   try {
     
@@ -65,5 +78,6 @@ export default {
   getvuelos,
   postvuelos,
   putvuelos,
+  getvuelosbyid,
   deletevuelos
 }

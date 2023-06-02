@@ -37,7 +37,7 @@ const vuelosRouter = express.Router()
  *           type: String
  *           example: USD
  *         price:
- *           type: Namber
+ *           type: Number
  *           example: 250.60
  *         arrival:
  *           type: string
@@ -73,7 +73,7 @@ const vuelosRouter = express.Router()
  *           type: String
  *           example: USD
  *         price:
- *           type: Namber
+ *           type: Number
  *           example: 250.60
  *         arrival:
  *           type: string
@@ -101,6 +101,31 @@ const vuelosRouter = express.Router()
 */
 
 vuelosRouter.get("/", vuelosServices.getvuelos)
+
+/**
+ * @openapi
+ * /vuelos/{id}:
+*    get:
+*      tags:
+*        - vuelos
+*      summary: Obtener un vuelo en específico.
+*      parameters:
+*        - name: id
+*          description: Ingresa el id del vuelo
+*          in: path
+*          required: true
+*          schema:
+*            type: string
+*      responses:
+*        '200':
+*          description: successful operation
+*          content:
+*            application/json:
+*              schema:
+*                $ref: "#/components/schemas/vuelosGET"
+*/
+
+vuelosRouter.get("/:id", vuelosServices.getvuelosbyid)
 
 /**
  * @openapi
