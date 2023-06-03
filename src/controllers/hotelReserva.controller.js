@@ -1,8 +1,5 @@
-import hotelSchema from "../models/hotelesReservas.js"
 import hotelServices from "../services/hotelReserva.service.js"
-import db from "../database/project.module.js"
 
-const model = new db(hotelSchema)
 
 async function getReservasHoteles(req,res){
   try {
@@ -50,7 +47,7 @@ async function deleteReservasHoteles(req,res){
     const {id} = req.params
     await hotelServices.deleteReservasHoteles(id)
     return await res.json({
-      message:"Reserva eliminada"
+      message:"Reserva Cnacelada"
     })
 
   } catch (error) {

@@ -1,7 +1,5 @@
-import mongoose from "mongoose";
 import express from "express"
-import db from "../controllers/project.module.js"
-import pasajeroServices from "../controllers/pasajeros.services.js";
+import pasajeroServices from "../controllers/pasajeros.controller.js";
 
 const pasajeroRouter = express.Router()
 

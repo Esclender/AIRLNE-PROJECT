@@ -1,16 +1,13 @@
-import pasajerosSchema from "../models/pasajeros.js"
-import db from "./project.module.js"
-
-const model = new db(pasajerosSchema)
+import pasajerosServices from "../services/pasajeros.service.js"
 
 async function getpasajero(req,res){
   try {
 
-    const rst = await model.get()
+    const rst = await pasajerosServices.getPasajeros()
     return await res.json(rst)
 
   } catch (error) {
-    res.json({
+    res.status(404).json({
       message:error
     })
   }
@@ -19,11 +16,11 @@ async function getpasajero(req,res){
 async function postpasajero(req,res){
   try {
     
-    const rst = await model.post(req.body)
+    const rst = await pasajerosServices.postPasajeros(req.body)
     return await res.status(201).json(rst)
 
   } catch (error) {
-    res.json({
+    res.status(400).json({
       message:error
     })
   }
@@ -32,14 +29,13 @@ async function postpasajero(req,res){
 async function putpasajero(req,res){
   try {
     const id = req.params.id
-    const rst = await model.put(id,req.body)
+    await pasajerosServices.putPasajeros(id,req.body)
     return await res.json({
-      message:"Pasajero Actualizado"
+      message:"La info del pasajero se ha actualizado"
     })
 
   } catch (error) {
-    console.log(error)
-    res.json({
+    res.status(404).json({
       message:error
     })
   }
@@ -48,14 +44,13 @@ async function putpasajero(req,res){
 async function deletepasajero(req,res){
   try {
     const id = req.params.id
-    const rst = await model.delete(id)
+    await pasajerosServices.deletePasajeros(id)
     return await res.json({
       message:"El pasajero ha cancelado su vuelo"
     })
 
   } catch (error) {
-    console.log(error)
-    res.json({
+    res.status(404).json({
       message:error
     })
   }
