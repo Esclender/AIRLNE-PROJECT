@@ -16,6 +16,19 @@ async function getvuelos(req,res){
   }
 }
 
+async function getvuelosbyid(req,res){
+  try {
+
+    const rst = await model.get(req.params.id)
+    return await res.json(rst)
+
+  } catch (error) {
+    res.json({
+      message:error
+    })
+  }
+}
+
 async function postvuelos(req,res){
   try {
     
@@ -49,7 +62,7 @@ async function deletevuelos(req,res){
     const id = req.params.id
     await model.delete(id)
     return await res.json({
-      message:"Vuelo eliminado"
+      message:"Vuelo cancelado"
     })
 
   } catch (error) {
@@ -63,5 +76,6 @@ export default {
   getvuelos,
   postvuelos,
   putvuelos,
+  getvuelosbyid,
   deletevuelos
 }

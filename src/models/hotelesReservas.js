@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
 
 const hotelBookingSchema = mongoose.Schema({
-  nombreHotel:{
+  nameHotel:{
     type:String,
     required: true
   },
-  calificacion:{
+  qualification:{
     type:Number,
     required: true
   },
-  ciudad:{
+  city:{
     type:String,
     required: true
   }
