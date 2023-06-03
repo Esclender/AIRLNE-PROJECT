@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import express from "express"
-import db from "../controllers/project.module.js"
-import bookingServices from "../controllers/hotelReserva.services.js";
+import db from "../database/project.module.js"
+import bookingServices from "../controllers/hotelReserva.controller.js";
 
 const hotelRouter = express.Router()
 

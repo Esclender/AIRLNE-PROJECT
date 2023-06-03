@@ -1,5 +1,5 @@
 import vuelosSchema from "../models/vuelos.js"
-import db from "./project.module.js"
+import db from "../database/project.module.js"
 
 const model = new db(vuelosSchema)
 
@@ -10,7 +10,7 @@ async function getvuelos(req,res){
     return await res.json(rst)
 
   } catch (error) {
-    res.json({
+    res.status(404).json({
       message:error
     })
   }
@@ -23,7 +23,7 @@ async function postvuelos(req,res){
     return await res.status(201).json(rst)
 
   } catch (error) {
-    res.json({
+    res.status(400).json({
       message:error
     })
   }
@@ -32,14 +32,13 @@ async function postvuelos(req,res){
 async function putvuelos(req,res){
   try {
     const id = req.params.id
-    const rst = await model.put(id,req.body)
+    await model.put(id,req.body)
     return await res.json({
       message:"Vuelo Actualizado"
     })
 
   } catch (error) {
-    console.log(error)
-    res.json({
+    res.status(404).json({
       message:error
     })
   }
@@ -48,14 +47,13 @@ async function putvuelos(req,res){
 async function deletevuelos(req,res){
   try {
     const id = req.params.id
-    const rst = await model.delete(id)
+    await model.delete(id)
     return await res.json({
-      message:"Vuelo eliminada"
+      message:"Vuelo eliminado"
     })
 
   } catch (error) {
-    console.log(error)
-    res.json({
+    res.status(404).json({
       message:error
     })
   }
