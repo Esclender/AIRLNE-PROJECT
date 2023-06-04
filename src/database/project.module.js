@@ -7,7 +7,7 @@ class db {
 
   async get(id){
     if(id != null){
-      const finded = this.data.findOne({"_id":`${id}`})
+      const finded = this.data.findById(id)
       return finded
     }else{
       const data = await this.data.find({})

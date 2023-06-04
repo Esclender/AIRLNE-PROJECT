@@ -1,4 +1,4 @@
-import pasajerosSchema from "../models/hotelesReservas.js"
+import pasajerosSchema from "../models/pasajeros.js"
 import db from "../database/project.module.js"
 
 const model = new db(pasajerosSchema)

@@ -13,7 +13,7 @@ const vuelosSchema = mongoose.Schema({
     type:Boolean,
     required: true
   },
-  exit:{
+  aboarding:{
     type:Date,
     required: true
   },
@@ -30,6 +30,15 @@ const vuelosSchema = mongoose.Schema({
     required: true
   },
 })
+
+
+vuelosSchema.methods = {
+  toJson: (schema) => {
+    const {__v, _id, ...vuelo} = schema.toObject()
+    vuelo.id = _id
+    return vuelo
+  }
+}
 
 const vuelos = mongoose.model("vuelos", vuelosSchema)
 

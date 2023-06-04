@@ -4,11 +4,19 @@ import db from "../database/project.module.js"
 const model = new db(vuelosSchema)
 
 async function getVuelos(){
-    return await model.get()
+  const rst = await model.get()
+  return await rst.map(schema => schema.toJson(schema))
+}
+
+async function getVueloById(id){
+  const rst = await model.get(id)
+  return await rst.toJson(rst)
+  
 }
 
 async function postVuelos(body){
-    return  await model.post(body)
+    const rst = await model.post(body)
+    return await rst.toJson(rst)
 }
 
 async function putVuelos(id, body){
@@ -23,5 +31,6 @@ export default {
   getVuelos,
   postVuelos,
   putVuelos,
-  deleteVuelos
+  deleteVuelos,
+  getVueloById
 }

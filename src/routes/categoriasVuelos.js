@@ -1,7 +1,5 @@
-import mongoose from "mongoose";
 import express from "express"
-import db from "../controllers/project.module.js"
-import categoriasVservices from "../controllers/categoriasVuelos.services.js";
+import categoriasVservices from "../controllers/categoriasVuelos.controller.js";
 
 const categoriasVuelosRuter = express.Router()
 

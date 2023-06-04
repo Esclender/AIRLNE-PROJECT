@@ -29,7 +29,7 @@ const vuelosRouter = express.Router()
  *         roundtrip:
  *           type: Boolean
  *           example: false
- *         exit:
+ *         aboarding:
  *           type: string
  *           format: date
  *           example: "2023-06-01T10:30:00Z" 
@@ -53,9 +53,6 @@ const vuelosRouter = express.Router()
  *     vuelosGET:
  *       type: object
  *       properties:
- *         _id: 
- *           type: string
- *           example: 6478b0eaa559cc7884a58952
  *         destination: 
  *           type: string
  *           example: Argentina
@@ -79,6 +76,9 @@ const vuelosRouter = express.Router()
  *           type: string
  *           format: date
  *           example: "2023-06-02T12:30:00Z"
+ *         id: 
+ *           type: string
+ *           example: 6478b0eaa559cc7884a58952
  */
 
 
@@ -147,8 +147,13 @@ vuelosRouter.get("/:id", vuelosServices.getvuelosbyid)
 *          content:
 *            application/json:
 *              schema:
-*               type: array
-*               items:
+*                type: object
+*                properties:
+*                  messagge:
+*                    type: String
+*                    example: Vuelo Creado
+*                  data:
+*                    type: object
 *                    $ref: "#/components/schemas/vuelosGET"
 */
 vuelosRouter.post("/", vuelosServices.postvuelos)
@@ -181,9 +186,8 @@ vuelosRouter.post("/", vuelosServices.postvuelos)
 *          content:
 *            application/json:
 *              schema:
-*               type: array
-*               items:
-*                    $ref: "#/components/schemas/vuelosGET"
+*               type: object
+*               example: Vuelo actualizado
 */
 vuelosRouter.put("/:id", vuelosServices.putvuelos)
 
@@ -207,9 +211,8 @@ vuelosRouter.put("/:id", vuelosServices.putvuelos)
 *          content:
 *            application/json:
 *              schema:
-*               type: array
-*               items:
-*                    $ref: "#/components/schemas/vuelosGET"
+*               type: object
+*               example: Vuelo cancelado
 */
 vuelosRouter.delete("/:id", vuelosServices.deletevuelos)
 

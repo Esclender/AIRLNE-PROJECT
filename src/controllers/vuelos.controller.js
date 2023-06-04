@@ -1,12 +1,11 @@
-import vuelosSchema from "../models/vuelos.js"
-import db from "../database/project.module.js"
+import vuelosServices from "../services/vuelos.service.js"
+import vuelosService from "../services/vuelos.service.js"
 
-const model = new db(vuelosSchema)
 
 async function getvuelos(req,res){
   try {
 
-    const rst = await model.get()
+    const rst = await vuelosServices.getVuelos()
     return await res.json(rst)
 
   } catch (error) {
@@ -18,12 +17,13 @@ async function getvuelos(req,res){
 
 async function getvuelosbyid(req,res){
   try {
-
-    const rst = await model.get(req.params.id)
+    const { id } = req.params
+    const rst = await vuelosService.getVueloById(id)
     return await res.json(rst)
 
   } catch (error) {
-    res.json({
+    console.log(error)
+    res.status(404).json({
       message:error
     })
   }
@@ -32,8 +32,11 @@ async function getvuelosbyid(req,res){
 async function postvuelos(req,res){
   try {
     
-    const rst = await model.post(req.body)
-    return await res.status(201).json(rst)
+    const rst = await vuelosServices.postVuelos(req.body)
+    return await res.status(201).json({
+      message:"Vuelo creado",
+      data:rst
+    })
 
   } catch (error) {
     res.status(400).json({
@@ -45,7 +48,7 @@ async function postvuelos(req,res){
 async function putvuelos(req,res){
   try {
     const id = req.params.id
-    await model.put(id,req.body)
+    await vuelosServices.putVuelos(id,req.body)
     return await res.json({
       message:"Vuelo Actualizado"
     })
@@ -60,7 +63,7 @@ async function putvuelos(req,res){
 async function deletevuelos(req,res){
   try {
     const id = req.params.id
-    await model.delete(id)
+    await vuelosServices.deleteVuelos(id)
     return await res.json({
       message:"Vuelo cancelado"
     })

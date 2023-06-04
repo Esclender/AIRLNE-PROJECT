@@ -4,11 +4,11 @@ import db from "../database/project.module.js"
 const model = new db(hotelSchema)
 
 async function getReservasHoteles(){
-    return await model.get()
+  return await model.get()
 }
 
 async function postReservasHoteles(body){
-    return  await model.post(body)
+  return  await model.post(body)
 }
 
 async function putReservasHoteles(id, body){
@@ -16,7 +16,7 @@ async function putReservasHoteles(id, body){
 }
 
 async function deleteReservasHoteles(id){
-    return await model.delete(id)
+  return await model.delete(id)
 }
 
 export default {

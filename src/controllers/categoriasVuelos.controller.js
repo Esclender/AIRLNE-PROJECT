@@ -1,16 +1,14 @@
-import categoriasVuelosSchema from "../models/categoriasVuelos.js"
-import db from "./project.module.js"
+import categoriasVServices from "../services/categoriasVuelos.service.js"
 
-const model = new db(categoriasVuelosSchema)
 
 async function getcategoriasVuelos(req,res){
   try {
 
-    const rst = await model.get()
+    const rst = await categoriasVServices.getCategoriasVuelos()
     return await res.json(rst)
 
   } catch (error) {
-    res.json({
+    res.status(404).json({
       message:error
     })
   }
@@ -19,11 +17,11 @@ async function getcategoriasVuelos(req,res){
 async function postcategoriasVuelos(req,res){
   try {
     
-    const rst = await model.post(req.body)
+    const rst = await categoriasVServices.postCategoriasVuelos(req.body)
     return await res.status(201).json(rst)
 
   } catch (error) {
-    res.json({
+    res.status(400).json({
       message:error
     })
   }
@@ -32,14 +30,13 @@ async function postcategoriasVuelos(req,res){
 async function putcategoriasVuelos(req,res){
   try {
     const id = req.params.id
-    const rst = await model.put(id,req.body)
+    await categoriasVServices.putCategoriasVuelos(id,req.body)
     return await res.json({
       message:"Categoria actualizada"
     })
 
   } catch (error) {
-    console.log(error)
-    res.json({
+    res.status(404).json({
       message:error
     })
   }
@@ -48,14 +45,13 @@ async function putcategoriasVuelos(req,res){
 async function deletecategoriasVuelos(req,res){
   try {
     const id = req.params.id
-    const rst = await model.delete(id)
+    await categoriasVServices.deleteCategoriasVuelos(id)
     return await res.json({
       message:"Categoria eliminada"
     })
 
   } catch (error) {
-    console.log(error)
-    res.json({
+    res.status(404).json({
       message:error
     })
   }
