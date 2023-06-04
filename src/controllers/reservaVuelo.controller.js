@@ -7,6 +7,7 @@ async function getReservaVuelos(req,res){
     return await res.json(rst)
 
   } catch (error) {
+    console.log(error);
     res.status(404).json({
       message:error
     })
@@ -23,6 +24,7 @@ async function postReservaVuelos(req,res){
     })
 
   } catch (error) {
+    console.log(error)
     res.status(400).json({
       message:error
     })

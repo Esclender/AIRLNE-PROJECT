@@ -16,6 +16,7 @@ const vueloReservaSchema = mongoose.Schema({
 })
 
 
+
 vueloReservaSchema.methods = {
   toJson: (schema) => {
     const {__v, _id, ...vuelo} = schema.toObject()
