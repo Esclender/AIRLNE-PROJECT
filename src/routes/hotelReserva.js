@@ -37,9 +37,6 @@ const hotelRouter = express.Router()
  *     ReservasHotelesRE:
  *       type: object
  *       properties:
- *         _id: 
- *           type: string
- *           example: 6478b0eaa559cc7884a58952
  *         nameHotel: 
  *           type: string
  *           example: Hotel Plaza El Bosque Ebro
@@ -49,6 +46,9 @@ const hotelRouter = express.Router()
  *         city:
  *           type: string
  *           example: Santiago de chile
+ *         id: 
+ *           type: string
+ *           example: 6478b0eaa559cc7884a58952
  */
 
 
@@ -92,8 +92,13 @@ hotelRouter.get("/", bookingServices.getReservasHoteles)
 *          content:
 *            application/json:
 *              schema:
-*               type: array
-*               items:
+*                type: object
+*                properties:
+*                  messagge:
+*                    type: String
+*                    example: Reserva resgistrada
+*                  data:
+*                    type: object
 *                    $ref: "#/components/schemas/ReservasHotelesRE"
 */
 hotelRouter.post("/reservas", bookingServices.postReservasHoteles)
@@ -126,9 +131,8 @@ hotelRouter.post("/reservas", bookingServices.postReservasHoteles)
 *          content:
 *            application/json:
 *              schema:
-*               type: array
-*               items:
-*                    $ref: "#/components/schemas/ReservasHotelesRE"
+*               type: string
+*               example: Reserva Actualizada
 */
 hotelRouter.put("/reservas/:id", bookingServices.putReservasHoteles)
 
@@ -152,9 +156,8 @@ hotelRouter.put("/reservas/:id", bookingServices.putReservasHoteles)
 *          content:
 *            application/json:
 *              schema:
-*               type: array
-*               items:
-*                    $ref: "#/components/schemas/ReservasHotelesRE"
+*               type: string
+*               example: Reserva cancelada
 */
 hotelRouter.delete("/reservas/:id", bookingServices.deleteReservasHoteles)
 

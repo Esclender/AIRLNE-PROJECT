@@ -19,6 +19,14 @@ const vueloCategorySchema = mongoose.Schema({
   }
 })
 
+vueloCategorySchema.methods = {
+  toJson: (schema) => {
+    const {__v, _id, ...vuelo} = schema.toObject()
+    vuelo.id = _id
+    return vuelo
+  }
+}
+
 const vcategory = mongoose.model("vueloCategorias", vueloCategorySchema)
 
 export default vcategory

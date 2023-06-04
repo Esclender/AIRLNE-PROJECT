@@ -15,8 +15,8 @@ async function getVueloById(id){
 }
 
 async function postVuelos(body){
-    const rst = await model.post(body)
-    return await rst.toJson(rst)
+  const rst = await model.post(body)
+  return await rst.toJson(rst)
 }
 
 async function putVuelos(id, body){

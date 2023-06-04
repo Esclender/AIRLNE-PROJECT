@@ -49,9 +49,6 @@ const categoriasVuelosRuter = express.Router()
  *     categoriasVuelosGET:
  *       type: object
  *       properties:
- *         _id: 
- *           type: string
- *           example: 6478b0eaa559cc7884a58952
  *         beneficies:
  *           type: array
  *           example: [
@@ -72,6 +69,9 @@ const categoriasVuelosRuter = express.Router()
  *         currency:
  *           type: string
  *           example: USD
+ *         id: 
+ *           type: string
+ *           example: 6478b0eaa559cc7884a58952
  */
 
 
@@ -115,8 +115,11 @@ categoriasVuelosRuter.get("/", categoriasVservices.getcategoriasVuelos)
 *          content:
 *            application/json:
 *              schema:
-*               type: array
-*               items:
+*                  messagge:
+*                    type: String
+*                    example: Categoria creada
+*                  data:
+*                    type: object
 *                    $ref: "#/components/schemas/categoriasVuelosGET"
 */
 categoriasVuelosRuter.post("/", categoriasVservices.postcategoriasVuelos)
@@ -149,9 +152,8 @@ categoriasVuelosRuter.post("/", categoriasVservices.postcategoriasVuelos)
 *          content:
 *            application/json:
 *              schema:
-*               type: array
-*               items:
-*                    $ref: "#/components/schemas/categoriasVuelosGET"
+*               type: string
+*               example: Categoria actualizada
 */
 categoriasVuelosRuter.put("/:id", categoriasVservices.putcategoriasVuelos)
 
@@ -175,7 +177,8 @@ categoriasVuelosRuter.put("/:id", categoriasVservices.putcategoriasVuelos)
 *          content:
 *            application/json:
 *              schema:
-*                $ref: "#/components/schemas/categoriasVuelosGET"
+*               type: string
+*               example: Categoria eliminada
 */
 categoriasVuelosRuter.delete("/:id", categoriasVservices.deletecategoriasVuelos)
 

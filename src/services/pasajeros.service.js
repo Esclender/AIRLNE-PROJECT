@@ -4,11 +4,13 @@ import db from "../database/project.module.js"
 const model = new db(pasajerosSchema)
 
 async function getPasajeros(){
-    return await model.get()
+  const rst = await model.get()
+  return await rst.map(schema => schema.toJson(schema))
 }
 
 async function postPasajeros(body){
-    return  await model.post(body)
+  const rst = await model.post(body)
+  return await rst.toJson(rst)
 }
 
 async function putPasajeros(id, body){

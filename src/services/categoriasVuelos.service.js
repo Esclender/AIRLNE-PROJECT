@@ -4,11 +4,13 @@ import db from "../database/project.module.js"
 const model = new db(categoriasVSchema)
 
 async function getCategoriasVuelos(){
-    return await model.get()
+  const rst = await model.get()
+  return await rst.map(schema => schema.toJson(schema))
 }
 
 async function postCategoriasVuelos(body){
-    return  await model.post(body)
+  const rst = await model.post(body)
+  return await rst.toJson(rst)
 }
 
 async function putCategoriasVuelos(id, body){

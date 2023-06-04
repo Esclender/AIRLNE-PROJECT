@@ -18,7 +18,10 @@ async function postcategoriasVuelos(req,res){
   try {
     
     const rst = await categoriasVServices.postCategoriasVuelos(req.body)
-    return await res.status(201).json(rst)
+    return await res.status(201).json({
+      message:"Categoria creada",
+      data:rst
+    })
 
   } catch (error) {
     res.status(400).json({

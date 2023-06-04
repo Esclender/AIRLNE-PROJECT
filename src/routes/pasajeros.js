@@ -43,9 +43,6 @@ const pasajeroRouter = express.Router()
  *     pasajeroGET:
  *       type: object
  *       properties:
- *         _id: 
- *           type: string
- *           example: 6478b0eaa559cc7884a58952
  *         name: 
  *           type: string
  *           example: Gerson
@@ -61,6 +58,9 @@ const pasajeroRouter = express.Router()
  *         Destination:
  *           type: String
  *           example: Argentina
+ *         id: 
+ *           type: string
+ *           example: 6478b0eaa559cc7884a58952
  */
 
 
@@ -104,8 +104,13 @@ pasajeroRouter.get("/", pasajeroServices.getpasajero)
 *          content:
 *            application/json:
 *              schema:
-*               type: array
-*               items:
+*                type: object
+*                properties:
+*                  messagge:
+*                    type: String
+*                    example: Pasajero registrado
+*                  data:
+*                    type: object
 *                    $ref: "#/components/schemas/pasajeroGET"
 */
 pasajeroRouter.post("/", pasajeroServices.postpasajero)
@@ -138,9 +143,8 @@ pasajeroRouter.post("/", pasajeroServices.postpasajero)
 *          content:
 *            application/json:
 *              schema:
-*               type: array
-*               items:
-*                    $ref: "#/components/schemas/pasajeroGET"
+*               type: string
+*               example: La info del pasajero se ha actualizado
 */
 pasajeroRouter.put("/:id", pasajeroServices.putpasajero)
 
@@ -164,9 +168,8 @@ pasajeroRouter.put("/:id", pasajeroServices.putpasajero)
 *          content:
 *            application/json:
 *              schema:
-*               type: array
-*               items:
-*                    $ref: "#/components/schemas/pasajeroGET"
+*               type: string
+*               example: El pasajero ha cancelado su vuelo
 */
 pasajeroRouter.delete("/:id", pasajeroServices.deletepasajero)
 

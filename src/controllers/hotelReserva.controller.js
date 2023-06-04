@@ -18,7 +18,10 @@ async function postReservasHoteles(req,res){
   try {
     
     const rst = await hotelServices.postReservasHoteles(req.body)
-    return await res.status(201).json(rst)
+    return await res.status(201).json({
+      message:"Reserva registrada",
+      data:rst
+    })
 
   } catch (error) {
     res.status(400).json({
@@ -47,7 +50,7 @@ async function deleteReservasHoteles(req,res){
     const {id} = req.params
     await hotelServices.deleteReservasHoteles(id)
     return await res.json({
-      message:"Reserva Cnacelada"
+      message:"Reserva Cancelada"
     })
 
   } catch (error) {

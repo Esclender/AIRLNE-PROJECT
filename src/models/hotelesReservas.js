@@ -15,6 +15,14 @@ const hotelBookingSchema = mongoose.Schema({
   }
 })
 
+hotelBookingSchema.methods = {
+  toJson: (schema) => {
+    const {__v, _id, ...vuelo} = schema.toObject()
+    vuelo.id = _id
+    return vuelo
+  }
+}
+
 const booking = mongoose.model("hotelesReservas", hotelBookingSchema)
 
 export default booking

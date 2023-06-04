@@ -17,7 +17,10 @@ async function postpasajero(req,res){
   try {
     
     const rst = await pasajerosServices.postPasajeros(req.body)
-    return await res.status(201).json(rst)
+    return await res.status(201).json({
+      message:"Pasajero registrado",
+      data:rst
+    })
 
   } catch (error) {
     res.status(400).json({
