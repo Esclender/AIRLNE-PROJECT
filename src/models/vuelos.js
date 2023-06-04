@@ -28,7 +28,7 @@ const vuelosSchema = mongoose.Schema({
   arrival:{
     type:Date,
     required: true
-  },
+  }
 })
 
 
