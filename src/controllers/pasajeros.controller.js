@@ -38,7 +38,13 @@ async function putpasajero(req,res){
     })
 
   } catch (error) {
-    res.status(404).json({
+    if(error.cause.status){
+      return res.status(error.cause.status).json({
+        message:error.message
+      })
+    }
+
+    res.status(500).json({
       message:error
     })
   }
@@ -53,7 +59,14 @@ async function deletepasajero(req,res){
     })
 
   } catch (error) {
-    res.status(404).json({
+    console.log(error);
+    if(error.cause.status){
+      return res.status(error.cause.status).json({
+        message:error.message
+      })
+    }
+
+    res.status(500).json({
       message:error
     })
   }

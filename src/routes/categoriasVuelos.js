@@ -115,6 +115,8 @@ categoriasVuelosRuter.get("/", categoriasVservices.getcategoriasVuelos)
 *          content:
 *            application/json:
 *              schema:
+*                type: object
+*                properties:
 *                  messagge:
 *                    type: String
 *                    example: Categoria creada
@@ -152,8 +154,8 @@ categoriasVuelosRuter.post("/", categoriasVservices.postcategoriasVuelos)
 *          content:
 *            application/json:
 *              schema:
-*               type: string
-*               example: Categoria actualizada
+*                type: string
+*                example: Categoria actualizada
 */
 categoriasVuelosRuter.put("/:id", categoriasVservices.putcategoriasVuelos)
 

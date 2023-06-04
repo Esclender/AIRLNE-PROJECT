@@ -39,7 +39,13 @@ async function putcategoriasVuelos(req,res){
     })
 
   } catch (error) {
-    res.status(404).json({
+    if(error.cause.status){
+      return res.status(error.cause.status).json({
+        message:error.message
+      })
+    }
+
+    res.status(500).json({
       message:error
     })
   }
@@ -54,7 +60,13 @@ async function deletecategoriasVuelos(req,res){
     })
 
   } catch (error) {
-    res.status(404).json({
+    if(error.cause.status){
+      return res.status(error.cause.status).json({
+        message:error.message
+      })
+    }
+
+    res.status(500).json({
       message:error
     })
   }

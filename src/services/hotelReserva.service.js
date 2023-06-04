@@ -1,11 +1,13 @@
 import hotelSchema from "../models/hotelesReservas.js"
 import db from "../database/project.module.js"
+import BaseException from "../exceptions/baseExceptions.module.js"
 
 const model = new db(hotelSchema)
 
 async function getReservasHoteles(){
   const rst = await model.get()
-  return await rst.map(schema => schema.toJson(schema))
+  const mapped = await rst.map(schema => schema.toJson(schema))
+  return await mapped
 }
 
 async function postReservasHoteles(body){
@@ -14,11 +16,15 @@ async function postReservasHoteles(body){
 }
 
 async function putReservasHoteles(id, body){
-  return await model.put(id,body)
+  const rst = await model.put(id,body)
+  if(!rst.modifiedCount) throw new BaseException("Reserva not found", 404);
+  return rst
 }
 
 async function deleteReservasHoteles(id){
-  return await model.delete(id)
+  const rst = await model.delete(id)
+  if(!rst.deletedCount) throw new BaseException("Reserva not found", 404);
+  return rst
 }
 
 export default {

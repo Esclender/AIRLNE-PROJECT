@@ -58,7 +58,7 @@ const reservasVuelosRouter = express.Router()
 *    get:
 *      tags:
 *        - ReservaDeVuelos
-*      summary: Devuelve un array de pasajeros
+*      summary: Devuelve un array de las reservass de vuelos actuales.
 *      responses:
 *        '200':
 *          description: successful operation
@@ -78,7 +78,7 @@ reservasVuelosRouter.get("/", reservasVuelosControllers.getReservaVuelos)
 *    post:
 *      tags:
 *        - ReservaDeVuelos
-*      summary: Agregar un pasajero
+*      summary: Agregar una nueva reserva.
 *      requestBody:
 *        description: Los parametros {destination, origin, passenger} son OBLIGATORIOS
 *        content:

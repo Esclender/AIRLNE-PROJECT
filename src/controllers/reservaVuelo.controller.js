@@ -24,7 +24,6 @@ async function postReservaVuelos(req,res){
     })
 
   } catch (error) {
-    console.log(error)
     res.status(400).json({
       message:error
     })

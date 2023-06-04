@@ -1,5 +1,4 @@
 import vuelosServices from "../services/vuelos.service.js"
-import vuelosService from "../services/vuelos.service.js"
 
 
 async function getvuelos(req,res){
@@ -18,12 +17,17 @@ async function getvuelos(req,res){
 async function getvuelosbyid(req,res){
   try {
     const { id } = req.params
-    const rst = await vuelosService.getVueloById(id)
+    const rst = await vuelosServices.getVueloById(id)
     return await res.json(rst)
 
   } catch (error) {
-    console.log(error)
-    res.status(404).json({
+    if(error.cause.status){
+      return res.status(error.cause.status).json({
+        message:error.message
+      })
+    }
+
+    res.status(500).json({
       message:error
     })
   }
@@ -54,7 +58,14 @@ async function putvuelos(req,res){
     })
 
   } catch (error) {
-    res.status(404).json({
+    console.log(error)
+    if(error.cause.status){
+      return res.status(error.cause.status).json({
+        message:error.message
+      })
+    }
+
+    res.status(500).json({
       message:error
     })
   }
@@ -69,7 +80,13 @@ async function deletevuelos(req,res){
     })
 
   } catch (error) {
-    res.status(404).json({
+    if(error.cause.status){
+      return res.status(error.cause.status).json({
+        message:error.message
+      })
+    }
+
+    res.status(500).json({
       message:error
     })
   }
