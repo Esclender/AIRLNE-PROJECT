@@ -108,7 +108,7 @@ pasajeroRouter.get("/", pasajeroServices.getpasajero)
 *                properties:
 *                  messagge:
 *                    type: String
-*                    example: Pasajero registrado
+*                    example: Pasajero registrado.
 *                  data:
 *                    type: object
 *                    $ref: "#/components/schemas/pasajeroGET"
@@ -143,8 +143,11 @@ pasajeroRouter.post("/", pasajeroServices.postpasajero)
 *          content:
 *            application/json:
 *              schema:
-*               type: string
-*               example: La info del pasajero se ha actualizado
+*                type: object
+*                properties:
+*                  messagge:
+*                    type: String
+*                    example: Info del Pasajero actualizada.
 */
 pasajeroRouter.put("/:id", pasajeroServices.putpasajero)
 
@@ -168,8 +171,11 @@ pasajeroRouter.put("/:id", pasajeroServices.putpasajero)
 *          content:
 *            application/json:
 *              schema:
-*               type: string
-*               example: El pasajero ha cancelado su vuelo
+*                type: object
+*                properties:
+*                  messagge:
+*                    type: String
+*                    example: El pasajero ha cancelado su vuelo.
 */
 pasajeroRouter.delete("/:id", pasajeroServices.deletepasajero)
 

@@ -96,7 +96,7 @@ reservasVuelosRouter.get("/", reservasVuelosControllers.getReservaVuelos)
 *                properties:
 *                  messagge:
 *                    type: String
-*                    example: Reserva registrado
+*                    example: Nueva Reserva registrada.
 *                  data:
 *                    type: object
 *                    $ref: "#/components/schemas/reservaVueloGET"

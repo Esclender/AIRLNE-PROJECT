@@ -5,7 +5,7 @@ const hotelBookingSchema = mongoose.Schema({
     type:String,
     required: true
   },
-  qualification:{
+  rating:{
     type:Number,
     required: true
   },

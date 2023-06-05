@@ -25,7 +25,7 @@ const options = {
 const swaggerSpec = swaggerJSDoc(options)
 
 const swaggerDocs = (app, port) => {
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+  app.use('/api/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
   console.log(`Your docs are in port ${port}` );
 }
 

@@ -154,8 +154,11 @@ categoriasVuelosRuter.post("/", categoriasVservices.postcategoriasVuelos)
 *          content:
 *            application/json:
 *              schema:
-*                type: string
-*                example: Categoria actualizada
+*                type: object
+*                properties:
+*                  messagge:
+*                    type: String
+*                    example: Categoria actualizada
 */
 categoriasVuelosRuter.put("/:id", categoriasVservices.putcategoriasVuelos)
 
@@ -179,8 +182,11 @@ categoriasVuelosRuter.put("/:id", categoriasVservices.putcategoriasVuelos)
 *          content:
 *            application/json:
 *              schema:
-*               type: string
-*               example: Categoria eliminada
+*                type: object
+*                properties:
+*                  messagge:
+*                    type: String
+*                    example: Categoria eliminada
 */
 categoriasVuelosRuter.delete("/:id", categoriasVservices.deletecategoriasVuelos)
 

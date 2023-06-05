@@ -186,8 +186,11 @@ vuelosRouter.post("/", vuelosServices.postvuelos)
 *          content:
 *            application/json:
 *              schema:
-*               type: object
-*               example: Vuelo actualizado
+*                type: object
+*                properties:
+*                  messagge:
+*                    type: String
+*                    example: Info del vuelo actualizada
 */
 vuelosRouter.put("/:id", vuelosServices.putvuelos)
 
@@ -211,8 +214,11 @@ vuelosRouter.put("/:id", vuelosServices.putvuelos)
 *          content:
 *            application/json:
 *              schema:
-*               type: object
-*               example: Vuelo cancelado
+*                type: object
+*                properties:
+*                  messagge:
+*                    type: String
+*                    example: Vuelo cancelado
 */
 vuelosRouter.delete("/:id", vuelosServices.deletevuelos)
 

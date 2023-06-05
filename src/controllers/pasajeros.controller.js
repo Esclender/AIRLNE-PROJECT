@@ -34,7 +34,7 @@ async function putpasajero(req,res){
     const id = req.params.id
     await pasajerosServices.putPasajeros(id,req.body)
     return await res.json({
-      message:"La info del pasajero se ha actualizado"
+      message:"Info del Pasajero actualizada."
     })
 
   } catch (error) {
@@ -55,7 +55,7 @@ async function deletepasajero(req,res){
     const id = req.params.id
     await pasajerosServices.deletePasajeros(id)
     return await res.json({
-      message:"El pasajero ha cancelado su vuelo"
+      message:"El pasajero ha cancelado su vuelo."
     })
 
   } catch (error) {

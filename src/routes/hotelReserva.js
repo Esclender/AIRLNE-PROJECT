@@ -21,7 +21,7 @@ const hotelRouter = express.Router()
  *         nameHotel: 
  *           type: string
  *           example: Hotel Plaza El Bosque Ebro
- *         qualification:
+ *         rating:
  *           type: number
  *           example: 8.8
  *         city:
@@ -40,7 +40,7 @@ const hotelRouter = express.Router()
  *         nameHotel: 
  *           type: string
  *           example: Hotel Plaza El Bosque Ebro
- *         qualification:
+ *         rating:
  *           type: number
  *           example: 8.8
  *         city:
@@ -131,8 +131,11 @@ hotelRouter.post("/reservas", bookingServices.postReservasHoteles)
 *          content:
 *            application/json:
 *              schema:
-*               type: string
-*               example: Reserva Actualizada
+*                type: object
+*                properties:
+*                  messagge:
+*                    type: String
+*                    example: Reserva actualizada
 */
 hotelRouter.put("/reservas/:id", bookingServices.putReservasHoteles)
 
@@ -156,8 +159,11 @@ hotelRouter.put("/reservas/:id", bookingServices.putReservasHoteles)
 *          content:
 *            application/json:
 *              schema:
-*               type: string
-*               example: Reserva cancelada
+*                type: object
+*                properties:
+*                  messagge:
+*                    type: String
+*                    example: Reserva cancelada
 */
 hotelRouter.delete("/reservas/:id", bookingServices.deleteReservasHoteles)
 

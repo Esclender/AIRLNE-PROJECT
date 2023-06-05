@@ -54,7 +54,7 @@ async function putvuelos(req,res){
     const id = req.params.id
     await vuelosServices.putVuelos(id,req.body)
     return await res.json({
-      message:"Vuelo Actualizado"
+      message:"Info del Vuelo Actualizada"
     })
 
   } catch (error) {
