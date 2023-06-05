@@ -1,7 +1,6 @@
 import swaggerUi from "swagger-ui-express"
 import swaggerJSDoc from "swagger-jsdoc"
 
-const PORT = process.env.PORT || 10801
 
 const options = {
   definition: {
