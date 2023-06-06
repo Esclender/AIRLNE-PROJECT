@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 const paqueteVueloSchemas = mongoose.Schema({
   avaibleHotels: {
-    type: String,
+    type: Array,
     required: true,
   },
   avaibleFlie: {
-    type: Number,
+    type: Array,
     required: true,
   },
 });
