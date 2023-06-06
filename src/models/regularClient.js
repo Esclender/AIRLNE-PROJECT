@@ -1,16 +1,13 @@
 import mongoose from "mongoose";
 
 const regularClientSchema = mongoose.Schema({
-    destination:{
-        type:String,
+    miles:{
+        type:Number,
         required: true
     },
-    origin:{
-        type:String,
-        required: true
-    },
+    
     passenger:{
-        type:String,
+        type:Object,
         required: true
     }
 })
