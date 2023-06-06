@@ -1,6 +1,7 @@
 import express from "express"
 import cors from "cors"
 import morgan from "morgan";
+import "dotenv/config.js"
 import mongoose from "mongoose"
 import hotelesRoutes from "./routes/hotelReserva.js"
 import swaggerDocsV1 from "./swagger.js";
@@ -9,7 +10,7 @@ import pasajeroRouter from "./routes/pasajeros.js";
 import vuelosCategories from "./routes/categoriasVuelos.js"
 import vuelosReservas from "./routes/reservaVuelo.js"
 
-const PORT = process.env.PORT || 10801;
+const PORT = 10801;
 const app = express()
 
 app.use(cors())
