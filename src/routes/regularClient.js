@@ -7,32 +7,23 @@ const regularClienteRouter = express.Router()
 /**
 * @openapi
 * tags:
-*  - name: pasajero
-*    description: Endpoints para obtener todos los pasajeros y sus destinos.
+*  - name: ClienteFrecuente
+*    description: Endpoints para obtener todos los Clientes que usan la aerolina con frecuencia.
 */
 
 /**
  * @openapi
  * components:
  *   schemas:
- *     pasajero:
+ *     ClienteFrecuente:
  *       type: object
  *       properties:
- *         name: 
- *           type: string
- *           example: Gerson Favian
- *         LastName:
- *           type: String
- *           example: Arcentales Zavala
- *         Age:
+ *         miles: 
  *           type: Number
- *           example: 19
- *         Passport_N:
- *           type: string
- *           example: "ZAB000254" 
- *         Destination:
- *           type: String
- *           example: Argentina
+ *           example: 350
+ *         passenger:
+ *           type: object
+ *           $ref: "#/components/schemas/pasajeroGET"
  */
 
 
@@ -40,24 +31,15 @@ const regularClienteRouter = express.Router()
  * @openapi
  * components:
  *   schemas:
- *     pasajeroGET:
+ *     ClienteFrecuenteGET:
  *       type: object
  *       properties:
- *         name: 
- *           type: string
- *           example: Gerson
- *         LastName:
- *           type: String
- *           example: Arcentales
- *         Age:
+ *         miles: 
  *           type: Number
- *           example: 19
- *         Passport_N:
- *           type: string
- *           example: "ZAB000254" 
- *         Destination:
- *           type: String
- *           example: Argentina
+ *           example: 350
+ *         passenger:
+ *           type: object
+ *           $ref: "#/components/schemas/pasajeroGET"
  *         id: 
  *           type: string
  *           example: 6478b0eaa559cc7884a58952
@@ -66,11 +48,11 @@ const regularClienteRouter = express.Router()
 
 /**
  * @openapi
- * /pasajero:
+ * /regularClient:
 *    get:
 *      tags:
-*        - pasajero
-*      summary: Devuelve un array de pasajeros
+*        - ClienteFrecuente
+*      summary: Devuelve un array de ClienteFrecuente
 *      responses:
 *        '200':
 *          description: successful operation
@@ -79,24 +61,24 @@ const regularClienteRouter = express.Router()
 *              schema:
 *               type: array
 *               items:
-*                    $ref: "#/components/schemas/pasajeroGET"
+*                    $ref: "#/components/schemas/ClienteFrecuenteGET"
 */
 
 regularClienteRouter.get("/", regularClientServices.getRegularClient)
 
 /**
  * @openapi
- * /pasajero:
+ * /regularClient:
 *    post:
 *      tags:
-*        - pasajero
+*        - ClienteFrecuente
 *      summary: Agregar un pasajero
 *      requestBody:
 *        description: Los parametros {name,LastName,Age, passport_N, Destination} son OBLIGATORIOS
 *        content:
 *          application/json:
 *            schema:
-*              $ref: '#/components/schemas/pasajero'
+*              $ref: '#/components/schemas/ClienteFrecuente'
 *        required: true
 *      responses:
 *        '200':
@@ -111,21 +93,21 @@ regularClienteRouter.get("/", regularClientServices.getRegularClient)
 *                    example: Pasajero registrado.
 *                  data:
 *                    type: object
-*                    $ref: "#/components/schemas/pasajeroGET"
+*                    $ref: "#/components/schemas/ClienteFrecuenteGET"
 */
 regularClienteRouter.post("/", regularClientServices.postRegularClient)
 
 
 /**
  * @openapi
- * /pasajero/{id}:
+ * /regularClient/{id}:
 *    put:
 *      tags:
-*        - pasajero
-*      summary: Actualizar a un pasajero.
+*        - ClienteFrecuente
+*      summary: Actualizar a un cliente.
 *      parameters:
 *        - name: id
-*          description: Ingresa el id del pasajero
+*          description: Ingresa el id del cliente
 *          in: path
 *          required: true
 *          schema:
@@ -135,7 +117,7 @@ regularClienteRouter.post("/", regularClientServices.postRegularClient)
 *        content:
 *          application/json:
 *            schema:
-*              $ref: '#/components/schemas/pasajero'
+*              $ref: '#/components/schemas/ClienteFrecuente'
 *        required: true
 *      responses:
 *        '200':
@@ -147,20 +129,20 @@ regularClienteRouter.post("/", regularClientServices.postRegularClient)
 *                properties:
 *                  messagge:
 *                    type: String
-*                    example: Info del Pasajero actualizada.
+*                    example: Info del Cliente fue actualizada.
 */
 regularClienteRouter.put("/:id", regularClientServices.putRegularClient)
 
 /**
  * @openapi
- * /pasajero/{id}:
+ * /regularClient/{id}:
 *    delete:
 *      tags:
-*        - pasajero
-*      summary: Borrar a un pasajero
+*        - ClienteFrecuente
+*      summary: Sancionar a un cliente 
 *      parameters:
 *        - name: id
-*          description: Escribe el id del pasajero
+*          description: Escribe el id del cliente
 *          in: path
 *          required: true
 *          schema:
@@ -175,7 +157,7 @@ regularClienteRouter.put("/:id", regularClientServices.putRegularClient)
 *                properties:
 *                  messagge:
 *                    type: String
-*                    example: El pasajero ha cancelado su vuelo.
+*                    example: El cliente ha sido sancionado.
 */
 regularClienteRouter.delete("/:id", regularClientServices.deleteRegularClient)
 

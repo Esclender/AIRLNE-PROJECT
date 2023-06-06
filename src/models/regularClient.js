@@ -22,6 +22,6 @@ regularClientSchema.methods = {
   }
 }
 
-const regularClient = mongoose.model("vuelosReservas", regularClientSchema)
+const regularClient = mongoose.model("regularclient", regularClientSchema)
 
 export default regularClient

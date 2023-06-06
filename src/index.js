@@ -10,7 +10,7 @@ import vuelosCategories from "./routes/categoriasVuelos.js"
 import vuelosReservas from "./routes/reservaVuelo.js"
 import regularCliente from "./routes/regularClient.js";
 
-const PORT = process.env.PORT || 10801;
+const PORT = process.env.PORT || 8081;
 const app = express()
 
 app.use(cors())
