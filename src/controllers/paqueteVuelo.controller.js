@@ -2,7 +2,7 @@ import paqueteServices from "../services/paqueteVuelo.service.js";
 
 async function getpaquete(req, res) {
   try {
-    const rst = await paqueteService.getPaquete();
+    const rst = await paqueteServices.getPaquete();
     return await res.json(rst);
   } catch (error) {
     res.status(404).json({
@@ -13,9 +13,9 @@ async function getpaquete(req, res) {
 
 async function postpaquete(req, res) {
   try {
-    const rst = await paqueteService.postPaquete(req.body);
+    const rst = await paqueteServices.postPaquete(req.body);
     return await res.status(201).json({
-      message: "Pasajero registrado",
+      message: "Paquete registrado",
       data: rst,
     });
   } catch (error) {
@@ -28,9 +28,9 @@ async function postpaquete(req, res) {
 async function putpaquete(req, res) {
   try {
     const id = req.params.id;
-    await paqueteService.putPaquete(id, req.body);
+    await paqueteServices.putPaquete(id, req.body);
     return await res.json({
-      message: "Info del Pasajero actualizada.",
+      message: "Info del paquete actualizado.",
     });
   } catch (error) {
     if (error.cause.status) {
@@ -48,9 +48,9 @@ async function putpaquete(req, res) {
 async function deletepaquete(req, res) {
   try {
     const id = req.params.id;
-    await paqueteService.deletePaquete(id);
+    await paqueteServices.deletePaquete(id);
     return await res.json({
-      message: "El pasajero ha cancelado su vuelo.",
+      message: "Paquete fue eliminado.",
     });
   } catch (error) {
     console.log(error);
