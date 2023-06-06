@@ -8,6 +8,7 @@ import vuelosRoutes from "./routes/vuelos.js"
 import pasajeroRouter from "./routes/pasajeros.js";
 import vuelosCategories from "./routes/categoriasVuelos.js"
 import vuelosReservas from "./routes/reservaVuelo.js"
+import regularCliente from "./routes/regularClient.js";
 
 const PORT = process.env.PORT || 10801;
 const app = express()
@@ -29,6 +30,7 @@ app.use("/vuelos",vuelosRoutes)
 app.use("/pasajero",pasajeroRouter)
 app.use("/categoriasVuelos",vuelosCategories)
 app.use("/vuelosReservas",vuelosReservas)
+app.use("/regularClient",regularCliente)
 
 
 
