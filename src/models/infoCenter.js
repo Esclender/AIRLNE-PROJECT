@@ -1,16 +1,8 @@
 import mongoose from "mongoose";
 
 const infoCenterSchema = mongoose.Schema({
-    destination:{
-        type:String,
-        required: true
-    },
-    origin:{
-        type:String,
-        required: true
-    },
-    passenger:{
-        type:String,
+    contactNumbers:{
+        type:Array,
         required: true
     }
 })
