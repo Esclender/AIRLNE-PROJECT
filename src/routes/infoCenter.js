@@ -1,5 +1,5 @@
 import express from "express"
-import infoCenterServices from "../controllers/infoCenters.controller.js";
+import infoCenterServices from "../controllers/infoCenter.controller.js";
 
 const infoCenterRouter = express.Router()
 
@@ -7,32 +7,20 @@ const infoCenterRouter = express.Router()
 /**
 * @openapi
 * tags:
-*  - name: pasajero
-*    description: Endpoints para obtener todos los pasajeros y sus destinos.
+*  - name: CentroInformativo
+*    description: Endpoints para obtener todos los medios de comunicacion para la aerolinea.
 */
 
 /**
  * @openapi
  * components:
  *   schemas:
- *     pasajero:
+ *     CentroInformativo:
  *       type: object
  *       properties:
- *         name: 
- *           type: string
- *           example: Gerson Favian
- *         LastName:
- *           type: String
- *           example: Arcentales Zavala
- *         Age:
- *           type: Number
- *           example: 19
- *         Passport_N:
- *           type: string
- *           example: "ZAB000254" 
- *         Destination:
- *           type: String
- *           example: Argentina
+ *         contactNumbers: 
+ *           type: Array
+ *           example: []
  */
 
 
@@ -40,24 +28,12 @@ const infoCenterRouter = express.Router()
  * @openapi
  * components:
  *   schemas:
- *     pasajeroGET:
+ *     CentroInformativoGET:
  *       type: object
  *       properties:
- *         name: 
- *           type: string
- *           example: Gerson
- *         LastName:
- *           type: String
- *           example: Arcentales
- *         Age:
- *           type: Number
- *           example: 19
- *         Passport_N:
- *           type: string
- *           example: "ZAB000254" 
- *         Destination:
- *           type: String
- *           example: Argentina
+ *         contactNumbers: 
+ *           type: Array
+ *           example: []
  *         id: 
  *           type: string
  *           example: 6478b0eaa559cc7884a58952
@@ -66,11 +42,11 @@ const infoCenterRouter = express.Router()
 
 /**
  * @openapi
- * /pasajero:
+ * /infoCenter:
 *    get:
 *      tags:
-*        - pasajero
-*      summary: Devuelve un array de pasajeros
+*        - CentroInformativo
+*      summary: Devuelve un array de informacion
 *      responses:
 *        '200':
 *          description: successful operation
@@ -79,24 +55,24 @@ const infoCenterRouter = express.Router()
 *              schema:
 *               type: array
 *               items:
-*                    $ref: "#/components/schemas/pasajeroGET"
+*                    $ref: "#/components/schemas/CentroInformativoGET"
 */
 
 infoCenterRouter.get("/", infoCenterServices.getinfoCenter)
 
 /**
  * @openapi
- * /pasajero:
+ * /infoCenter:
 *    post:
 *      tags:
-*        - pasajero
-*      summary: Agregar un pasajero
+*        - CentroInformativo
+*      summary: Agregar informacion
 *      requestBody:
 *        description: Los parametros {name,LastName,Age, passport_N, Destination} son OBLIGATORIOS
 *        content:
 *          application/json:
 *            schema:
-*              $ref: '#/components/schemas/pasajero'
+*              $ref: '#/components/schemas/CentroInformativo'
 *        required: true
 *      responses:
 *        '200':
@@ -108,24 +84,24 @@ infoCenterRouter.get("/", infoCenterServices.getinfoCenter)
 *                properties:
 *                  messagge:
 *                    type: String
-*                    example: Pasajero registrado.
+*                    example: Informacion registrada.
 *                  data:
 *                    type: object
-*                    $ref: "#/components/schemas/pasajeroGET"
+*                    $ref: "#/components/schemas/CentroInformativoGET"
 */
 infoCenterRouter.post("/", infoCenterServices.postinfoCenter)
 
 
 /**
  * @openapi
- * /pasajero/{id}:
+ * /CentroInformativo/{id}:
 *    put:
 *      tags:
-*        - pasajero
-*      summary: Actualizar a un pasajero.
+*        - CentroInformativo
+*      summary: Actualizar la informacion.
 *      parameters:
 *        - name: id
-*          description: Ingresa el id del pasajero
+*          description: Ingresa el id de la ifo actualizada
 *          in: path
 *          required: true
 *          schema:
@@ -135,7 +111,7 @@ infoCenterRouter.post("/", infoCenterServices.postinfoCenter)
 *        content:
 *          application/json:
 *            schema:
-*              $ref: '#/components/schemas/pasajero'
+*              $ref: '#/components/schemas/CentroInformativo'
 *        required: true
 *      responses:
 *        '200':
@@ -147,20 +123,20 @@ infoCenterRouter.post("/", infoCenterServices.postinfoCenter)
 *                properties:
 *                  messagge:
 *                    type: String
-*                    example: Info del Pasajero actualizada.
+*                    example: La Info fue actualizada.
 */
 infoCenterRouter.put("/:id", infoCenterServices.putinfoCenter)
 
 /**
  * @openapi
- * /pasajero/{id}:
+ * /CentroInformativo/{id}:
 *    delete:
 *      tags:
-*        - pasajero
-*      summary: Borrar a un pasajero
+*        - CentroInformativo
+*      summary: Borrar la informacion
 *      parameters:
 *        - name: id
-*          description: Escribe el id del pasajero
+*          description: Escribe el id de la info a eliminar.
 *          in: path
 *          required: true
 *          schema:
@@ -175,7 +151,7 @@ infoCenterRouter.put("/:id", infoCenterServices.putinfoCenter)
 *                properties:
 *                  messagge:
 *                    type: String
-*                    example: El pasajero ha cancelado su vuelo.
+*                    example: La info ha sido eliminada.
 */
 infoCenterRouter.delete("/:id", infoCenterServices.deleteinfoCenter)
 

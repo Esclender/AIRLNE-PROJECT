@@ -17,6 +17,6 @@ infoCenterSchema.methods = {
   }
 }
 
-const infoCenter = mongoose.model("vuelosReservas", infoCenterSchema)
+const infoCenter = mongoose.model("infocenter", infoCenterSchema)
 
 export default infoCenter
