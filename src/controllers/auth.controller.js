@@ -5,7 +5,10 @@ async function loginUser(req,res){
   try {
     const {email,password} = req.body
     const token = await loginServices.loginUser(email, password)
-    return res.json({token:token})
+    return res.json({
+      message:"Usuario verificado",
+      token:token
+    })
 
   } catch (error) {
     console.log(error)

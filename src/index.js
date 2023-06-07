@@ -9,6 +9,7 @@ import vuelosRoutes from "./routes/vuelos.js"
 import pasajeroRouter from "./routes/pasajeros.js";
 import vuelosCategories from "./routes/categoriasVuelos.js"
 import vuelosReservas from "./routes/reservaVuelo.js"
+import userRoutes from "./routes/auth.js"
 
 const PORT = 10801;
 const app = express()
@@ -30,7 +31,7 @@ app.use("/vuelos",vuelosRoutes)
 app.use("/pasajero",pasajeroRouter)
 app.use("/categoriasVuelos",vuelosCategories)
 app.use("/vuelosReservas",vuelosReservas)
-
+app.use("/auth",userRoutes)
 
 
 mongoose.connect("mongodb+srv://e00181703:zGju3VAVTcVj8ALA@cluster0.xzeljne.mongodb.net/?retryWrites=true&w=majority", {dbName:"Airlne"})

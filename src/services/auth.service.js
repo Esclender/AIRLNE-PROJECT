@@ -1,15 +1,15 @@
-import loginSchema from "../models/loginSchema.js"
-import BaseRequestException from "../exceptions/baseRequestException.module.js"
+import userSchema from "../models/authSchema.js"
+import BaseRequestException from "../exceptions/baseRequestExceptions.module.js"
 import genrateJwt from"../utils/generateJwt.js"
 
 async function loginUser(email,passw){
-  const user = await loginSchema.findOne({email:email})
+  const user = await userSchema.findOne({email:email})
 
   if(!user){
     throw new BaseRequestException("email is obligatory")
   }
 
-  const validatePassw = user.password === passw
+  const validatePassw = user.password == passw
 
   if(!validatePassw){
     throw new BaseRequestException("The passwords don't match")

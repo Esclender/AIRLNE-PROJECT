@@ -1,17 +1,21 @@
 import jwt from "jsonwebtoken"
-import loginSchema from "../models/loginSchema.js"
+import userSchema from "../models/authSchema.js"
 
 async function verifyJwt(req,res,next) {
-  const token = req.header("Authorization")
+  let token = req.header("Authorization")
+  console.log(token)
+
 
   if (!token) {
     return res.status(401).send("A token is required for authentication");
   }
 
   try {
+    token = token.split(" ")[1]
+    console.log(token)
     const {id} = jwt.verify(token, process.env.TOKEN_KEY);
 
-    const user = loginSchema.findById(id)
+    const user = userSchema.findById(id)
 
     if(!user){
       res.status(401).json({
