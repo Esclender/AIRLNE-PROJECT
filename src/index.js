@@ -1,6 +1,7 @@
 import express from "express"
 import cors from "cors"
 import morgan from "morgan";
+import "dotenv/config.js"
 import mongoose from "mongoose"
 import hotelesRoutes from "./routes/hotelReserva.js"
 import swaggerDocsV1 from "./swagger.js";
@@ -10,8 +11,9 @@ import vuelosCategories from "./routes/categoriasVuelos.js"
 import vuelosReservas from "./routes/reservaVuelo.js"
 import regularCliente from "./routes/regularClient.js";
 import infoCenter from "./routes/infoCenter.js";
+import userRoutes from "./routes/auth.js"
 
-const PORT = process.env.PORT || 8081;
+const PORT = 10801;
 const app = express()
 
 app.use(cors())
@@ -33,6 +35,7 @@ app.use("/categoriasVuelos",vuelosCategories)
 app.use("/vuelosReservas",vuelosReservas)
 app.use("/regularClient",regularCliente)
 app.use("/infoCenter",infoCenter)
+app.use("/auth",userRoutes)
 
 
 mongoose.connect("mongodb+srv://e00181703:zGju3VAVTcVj8ALA@cluster0.xzeljne.mongodb.net/?retryWrites=true&w=majority", {dbName:"Airlne"})

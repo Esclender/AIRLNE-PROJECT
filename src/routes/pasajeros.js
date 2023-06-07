@@ -1,5 +1,6 @@
 import express from "express"
 import pasajeroServices from "../controllers/pasajeros.controller.js";
+import validarJwt from "../middleware/validateJwt.js"
 
 const pasajeroRouter = express.Router()
 
@@ -82,7 +83,7 @@ const pasajeroRouter = express.Router()
 *                    $ref: "#/components/schemas/pasajeroGET"
 */
 
-pasajeroRouter.get("/", pasajeroServices.getpasajero)
+pasajeroRouter.get("/",[validarJwt], pasajeroServices.getpasajero)
 
 /**
  * @openapi
@@ -113,7 +114,7 @@ pasajeroRouter.get("/", pasajeroServices.getpasajero)
 *                    type: object
 *                    $ref: "#/components/schemas/pasajeroGET"
 */
-pasajeroRouter.post("/", pasajeroServices.postpasajero)
+pasajeroRouter.post("/",[validarJwt], pasajeroServices.postpasajero)
 
 
 /**
@@ -149,7 +150,7 @@ pasajeroRouter.post("/", pasajeroServices.postpasajero)
 *                    type: String
 *                    example: Info del Pasajero actualizada.
 */
-pasajeroRouter.put("/:id", pasajeroServices.putpasajero)
+pasajeroRouter.put("/:id",[validarJwt], pasajeroServices.putpasajero)
 
 /**
  * @openapi
@@ -177,6 +178,6 @@ pasajeroRouter.put("/:id", pasajeroServices.putpasajero)
 *                    type: String
 *                    example: El pasajero ha cancelado su vuelo.
 */
-pasajeroRouter.delete("/:id", pasajeroServices.deletepasajero)
+pasajeroRouter.delete("/:id",[validarJwt], pasajeroServices.deletepasajero)
 
 export default pasajeroRouter

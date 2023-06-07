@@ -1,5 +1,6 @@
 import express from "express"
 import categoriasVservices from "../controllers/categoriasVuelos.controller.js";
+import validarJwt from "../middleware/validateJwt.js";
 
 const categoriasVuelosRuter = express.Router()
 
@@ -93,7 +94,7 @@ const categoriasVuelosRuter = express.Router()
 *                    $ref: "#/components/schemas/categoriasVuelosGET"
 */
 
-categoriasVuelosRuter.get("/", categoriasVservices.getcategoriasVuelos)
+categoriasVuelosRuter.get("/",[validarJwt], categoriasVservices.getcategoriasVuelos)
 
 /**
  * @openapi
@@ -124,7 +125,7 @@ categoriasVuelosRuter.get("/", categoriasVservices.getcategoriasVuelos)
 *                    type: object
 *                    $ref: "#/components/schemas/categoriasVuelosGET"
 */
-categoriasVuelosRuter.post("/", categoriasVservices.postcategoriasVuelos)
+categoriasVuelosRuter.post("/",[validarJwt], categoriasVservices.postcategoriasVuelos)
 
 
 /**
@@ -160,7 +161,7 @@ categoriasVuelosRuter.post("/", categoriasVservices.postcategoriasVuelos)
 *                    type: String
 *                    example: Categoria actualizada
 */
-categoriasVuelosRuter.put("/:id", categoriasVservices.putcategoriasVuelos)
+categoriasVuelosRuter.put("/:id",[validarJwt], categoriasVservices.putcategoriasVuelos)
 
 /**
  * @openapi
@@ -188,6 +189,6 @@ categoriasVuelosRuter.put("/:id", categoriasVservices.putcategoriasVuelos)
 *                    type: String
 *                    example: Categoria eliminada
 */
-categoriasVuelosRuter.delete("/:id", categoriasVservices.deletecategoriasVuelos)
+categoriasVuelosRuter.delete("/:id",[validarJwt], categoriasVservices.deletecategoriasVuelos)
 
 export default categoriasVuelosRuter

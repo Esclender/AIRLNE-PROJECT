@@ -17,7 +17,6 @@ class db {
 
   post(body){
     const newReserva = this.data(body)
-    
     return newReserva.save()
   }
 
