@@ -19,6 +19,6 @@ paqueteVueloSchemas.methods = {
   },
 };
 
-const paquete = mongoose.model("hotelesReservas", paqueteVueloSchemas);
+const paquete = mongoose.model("paquetevuelos", paqueteVueloSchemas);
 
 export default paquete;
