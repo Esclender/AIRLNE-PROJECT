@@ -6,56 +6,40 @@ const paqueteRouter = express.Router();
 /**
  * @openapi
  * tags:
- *  - name: pasajero
- *    description: Endpoints para obtener todos los pasajeros y sus destinos.
+ *  - name: Paquete
+ *    description: Endpoints para obtener todos los paquetes.
  */
 
 /**
  * @openapi
  * components:
  *   schemas:
- *     pasajero:
+ *     vuelosGET:
  *       type: object
  *       properties:
- *         name:
+ *         destination:
  *           type: string
- *           example: Gerson Favian
- *         LastName:
- *           type: String
- *           example: Arcentales Zavala
- *         Age:
- *           type: Number
- *           example: 19
- *         Passport_N:
- *           type: string
- *           example: "ZAB000254"
- *         Destination:
- *           type: String
  *           example: Argentina
- */
-
-/**
- * @openapi
- * components:
- *   schemas:
- *     pasajeroGET:
- *       type: object
- *       properties:
- *         name:
- *           type: string
- *           example: Gerson
- *         LastName:
+ *         origin:
  *           type: String
- *           example: Arcentales
- *         Age:
+ *           example: Perú
+ *         roundtrip:
+ *           type: Boolean
+ *           example: false
+ *         exit:
+ *           type: string
+ *           format: date
+ *           example: "2023-06-01T10:30:00Z"
+ *         currency:
+ *           type: String
+ *           example: USD
+ *         price:
  *           type: Number
- *           example: 19
- *         Passport_N:
+ *           example: 250.60
+ *         arrival:
  *           type: string
- *           example: "ZAB000254"
- *         Destination:
- *           type: String
- *           example: Argentina
+ *           format: date
+ *           example: "2023-06-02T12:30:00Z"
  *         id:
  *           type: string
  *           example: 6478b0eaa559cc7884a58952
@@ -63,11 +47,69 @@ const paqueteRouter = express.Router();
 
 /**
  * @openapi
- * /pasajero:
- *    get:
+ * components:
+ *   schemas:
+ *     ReservasHotelesRE:
+ *       type: object
+ *       properties:
+ *         nameHotel:
+ *           type: string
+ *           example: Hotel Plaza El Bosque Ebro
+ *         rating:
+ *           type: number
+ *           example: 8.8
+ *         city:
+ *           type: string
+ *           example: Santiago de chile
+ *         id:
+ *           type: string
+ *           example: 6478b0eaa559cc7884a58952
+ */
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     paquete:
+ *       type: object
+ *       properties:
+ *         avaibleHotels:
+ *           type: array
+ *           items:
+ *                $ref: "#/components/schemas/ReservasHotelesRE"
+ *         avaibleFlie:
+ *           type: array
+ *           items:
+ *                $ref: "#/components/schemas/vuelosGET"
+ */
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     paqueteGET:
+ *       type: object
+ *       properties:
+ *         avaibleHotels:
+ *           type: array
+ *           items:
+ *                $ref: "#/components/schemas/ReservasHotelesRE"
+ *         avaibleFlie:
+ *           type: array
+ *           items:
+ *                $ref: "#/components/schemas/vuelosGET"
+ *         id:
+ *           type: string
+ *           example: 6478b0eaa559cc7884a58952
+ */
+
+/**
+ * @openapi
+ * /paquete:
+ *   get:
  *      tags:
- *        - pasajero
- *      summary: Devuelve un array de pasajeros
+ *        - Paquete
+ *      summary: Devuelve un array de paquete
  *      responses:
  *        '200':
  *          description: successful operation
@@ -76,24 +118,24 @@ const paqueteRouter = express.Router();
  *              schema:
  *               type: array
  *               items:
- *                    $ref: "#/components/schemas/pasajeroGET"
+ *                    $ref: "#/components/schemas/paqueteGET"
  */
 
 paqueteRouter.get("/", paqueteServices.getpaquete);
 
 /**
  * @openapi
- * /pasajero:
- *    post:
+ * /paquete:
+ *   post:
  *      tags:
- *        - pasajero
+ *        - Paquete
  *      summary: Agregar un pasajero
  *      requestBody:
  *        description: Los parametros {name,LastName,Age, passport_N, Destination} son OBLIGATORIOS
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/pasajero'
+ *              $ref: '#/components/schemas/paquete'
  *        required: true
  *      responses:
  *        '200':
@@ -108,20 +150,20 @@ paqueteRouter.get("/", paqueteServices.getpaquete);
  *                    example: Pasajero registrado.
  *                  data:
  *                    type: object
- *                    $ref: "#/components/schemas/pasajeroGET"
+ *                    $ref: "#/components/schemas/paqueteGET"
  */
 paqueteRouter.post("/", paqueteServices.postpaquete);
 
 /**
  * @openapi
- * /pasajero/{id}:
+ * /paquete/{id}:
  *    put:
  *      tags:
- *        - pasajero
- *      summary: Actualizar a un pasajero.
+ *        - Paquete
+ *      summary: Actualizar el paquete.
  *      parameters:
  *        - name: id
- *          description: Ingresa el id del pasajero
+ *          description: Ingresa el id del paquete
  *          in: path
  *          required: true
  *          schema:
@@ -131,7 +173,7 @@ paqueteRouter.post("/", paqueteServices.postpaquete);
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/pasajero'
+ *              $ref: '#/components/schemas/paquete'
  *        required: true
  *      responses:
  *        '200':
@@ -143,20 +185,20 @@ paqueteRouter.post("/", paqueteServices.postpaquete);
  *                properties:
  *                  messagge:
  *                    type: String
- *                    example: Info del Pasajero actualizada.
+ *                    example: Info del Paquete fue actualizada.
  */
 paqueteRouter.put("/:id", paqueteServices.putpaquete);
 
 /**
  * @openapi
- * /pasajero/{id}:
- *    delete:
+ * /paquete/{id}:
+ *   delete:
  *      tags:
- *        - pasajero
+ *        - Paquete
  *      summary: Borrar a un pasajero
  *      parameters:
  *        - name: id
- *          description: Escribe el id del pasajero
+ *          description: Escribe el id del paquete
  *          in: path
  *          required: true
  *          schema:
@@ -171,7 +213,7 @@ paqueteRouter.put("/:id", paqueteServices.putpaquete);
  *                properties:
  *                  messagge:
  *                    type: String
- *                    example: El pasajero ha cancelado su vuelo.
+ *                    example: El paquete fue eliminado.
  */
 paqueteRouter.delete("/:id", paqueteServices.deletepaquete);
 
