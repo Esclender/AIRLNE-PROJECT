@@ -11,67 +11,6 @@ const reservasVuelosRouter = express.Router()
 *    description: Endpoints para obtener todas las reservas de vuelo hechas.
 */
 
-/**
- * @openapi
- * components:
- *   schemas:
- *     vuelosGET:
- *       type: object
- *       properties:
- *         destination: 
- *           type: string
- *           example: Argentina
- *         origin:
- *           type: String
- *           example: Perú
- *         roundtrip:
- *           type: Boolean
- *           example: false
- *         exit:
- *           type: string
- *           format: date
- *           example: "2023-06-01T10:30:00Z" 
- *         currency:
- *           type: String
- *           example: USD
- *         price:
- *           type: Number
- *           example: 250.60
- *         arrival:
- *           type: string
- *           format: date
- *           example: "2023-06-02T12:30:00Z"
- *         id: 
- *           type: string
- *           example: 6478b0eaa559cc7884a58952
- */
-
-/**
- * @openapi
- * components:
- *   schemas:
- *     pasajeroGET:
- *       type: object
- *       properties:
- *         name: 
- *           type: string
- *           example: Gerson
- *         LastName:
- *           type: String
- *           example: Arcentales
- *         Age:
- *           type: Number
- *           example: 19
- *         Passport_N:
- *           type: string
- *           example: "ZAB000254" 
- *         Destination:
- *           type: String
- *           example: Argentina
- *         id: 
- *           type: string
- *           example: 6478b0eaa559cc7884a58952
- */
 
 /**
  * @openapi
@@ -86,6 +25,9 @@ const reservasVuelosRouter = express.Router()
  *         bookedFlie:
  *           type: object
  *           $ref: "#/components/schemas/vuelosGET"
+ *         id:
+ *           type: string
+ *           example: 6478b0eaa559cc7884a58952
  */
 
 
@@ -96,12 +38,12 @@ const reservasVuelosRouter = express.Router()
  *     reservaVuelo:
  *       type: object
  *       properties:
- *          passenger:
- *            type: string
- *            example: 6478b0eaa559cc7884a58952
- *          bookedFile:
- *            type: string
- *            example: 6478b0eaa559cc7884a58952
+ *         passenger:
+ *            type: object
+ *            $ref: "#/components/schemas/pasajeroGET"
+ *         bookedFlie:
+ *           type: object
+ *           $ref: "#/components/schemas/vuelosGET"
  */
 
 
@@ -133,11 +75,19 @@ reservasVuelosRouter.get("/", reservasVuelosControllers.getReservaVuelos)
 *        - ReservaDeVuelos
 *      summary: Agregar un pasajero
 *      requestBody:
-*        description: Los parametros {destination, origin, passenger} son OBLIGATORIOS
+*        description: Para crear uan reserva se debe enviar el Nummero de pasaporte del pasajero y el id del vuelo reservado.
 *        content:
 *          application/json:
 *            schema:
-*              $ref: '#/components/schemas/reservaVuelo'
+*              type: object
+*              properties:
+*                passengerPassportN:
+*                  type: string
+*                bookedFlieId:
+*                  type: string
+*              example:
+*                passengerPassportN: ZAB000254
+*                bookedFlieId: 6478b0eaa559cc7884a58952
 *        required: true
 *      responses:
 *        '200':
@@ -158,17 +108,29 @@ reservasVuelosRouter.post("/", reservasVuelosControllers.postReservaVuelos)
 
 /**
  * @openapi
- * /vuelosReservas:
+ * /vuelosReservas/{id}:
 *    put:
 *      tags:
 *        - ReservaDeVuelos
-*      summary: Actualizar una nueva Reserva
+*      summary: Actualizar una reserva, solo se podra modificar el vuelo de un pasajero que ya tenga una reserva.
+*      parameters:
+*        - name: id
+*          description: Ingresa el id de la reserva.
+*          in: path
+*          required: true
+*          schema:
+*            type: string
 *      requestBody:
-*        description: Los parametros {destination, origin, passenger} son OBLIGATORIOS
+*        description: Parametro a actualizar
 *        content:
 *          application/json:
 *            schema:
-*              $ref: '#/components/schemas/reservaVuelo'
+*              type: object
+*              properties:
+*                bookedFlieId:
+*                  type: string
+*              example:
+*                bookedFlieId: 6478b0eaa559cc7884a58952
 *        required: true
 *      responses:
 *        '200':
@@ -176,47 +138,35 @@ reservasVuelosRouter.post("/", reservasVuelosControllers.postReservaVuelos)
 *          content:
 *            application/json:
 *              schema:
-*                type: object
-*                properties:
-*                  messagge:
-*                    type: String
-*                    example: La reserva ha sido actualizada.
-*                  data:
-*                    type: object
-*                    $ref: "#/components/schemas/reservaVueloGET"
+*               type: object
+*               example: Reserva actualizada
 */
-reservasVuelosRouter.put("/", reservasVuelosControllers.putReservaVuelo)
+reservasVuelosRouter.put("/:id", reservasVuelosControllers.putReservaVuelo)
 
 /**
  * @openapi
- * /vuelosReservas:
+ * /vuelosReservas/{id}:
 *    delete:
 *      tags:
 *        - ReservaDeVuelos
-*      summary: Eliminar una nueva reserva.
-*      requestBody:
-*        description: Los parametros {destination, origin, passenger} son OBLIGATORIOS
-*        content:
-*          application/json:
-*            schema:
-*              $ref: '#/components/schemas/reservaVuelo'
-*        required: true
+*      summary: Actualizar una reserva, solo se podra modificar el vuelo de un pasajero que ya tenga una reserva.
+*      parameters:
+*        - name: id
+*          description: Ingresa el id de la reserva.
+*          in: path
+*          required: true
+*          schema:
+*            type: string
 *      responses:
 *        '200':
 *          description: successful operation
 *          content:
 *            application/json:
 *              schema:
-*                type: object
-*                properties:
-*                  messagge:
-*                    type: String
-*                    example: La reserva ha sido cancelada.
-*                  data:
-*                    type: object
-*                    $ref: "#/components/schemas/reservaVueloGET"
+*               type: object
+*               example: Reserva eliminado
 */
-reservasVuelosRouter.delete("/", reservasVuelosControllers.deleteReservaVuelo)
+reservasVuelosRouter.delete("/:id", reservasVuelosControllers.deleteReservaVuelo)
 
 
 export default reservasVuelosRouter
