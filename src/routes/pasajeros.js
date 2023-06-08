@@ -8,7 +8,7 @@ const pasajeroRouter = express.Router()
 * @openapi
 * tags:
 *  - name: pasajero
-*    description: Endpoints para obtener todos los pasajeros y sus destinos.
+*    description: Endpoints para obtener todos los pasajeros.
 */
 
 /**
@@ -21,18 +21,15 @@ const pasajeroRouter = express.Router()
  *         name: 
  *           type: string
  *           example: Gerson Favian
- *         LastName:
+ *         lastName:
  *           type: String
  *           example: Arcentales Zavala
- *         Age:
+ *         age:
  *           type: Number
  *           example: 19
- *         Passport_N:
+ *         passport_N:
  *           type: string
  *           example: "ZAB000254" 
- *         Destination:
- *           type: String
- *           example: Argentina
  */
 
 
@@ -46,18 +43,15 @@ const pasajeroRouter = express.Router()
  *         name: 
  *           type: string
  *           example: Gerson
- *         LastName:
+ *         lastName:
  *           type: String
  *           example: Arcentales
- *         Age:
+ *         age:
  *           type: Number
  *           example: 19
- *         Passport_N:
+ *         passport_N:
  *           type: string
  *           example: "ZAB000254" 
- *         Destination:
- *           type: String
- *           example: Argentina
  *         id: 
  *           type: string
  *           example: 6478b0eaa559cc7884a58952
