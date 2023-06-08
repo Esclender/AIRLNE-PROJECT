@@ -15,7 +15,7 @@ const reservasVuelosRouter = express.Router()
  * @openapi
  * components:
  *   schemas:
- *     reservaVuelo:
+ *     vuelosGET:
  *       type: object
  *       properties:
  *         destination: 
@@ -23,12 +23,55 @@ const reservasVuelosRouter = express.Router()
  *           example: Argentina
  *         origin:
  *           type: String
- *           example: Peru
- *         passenger:
+ *           example: Perú
+ *         roundtrip:
+ *           type: Boolean
+ *           example: false
+ *         exit:
  *           type: string
- *           example: Gerson Favian
+ *           format: date
+ *           example: "2023-06-01T10:30:00Z" 
+ *         currency:
+ *           type: String
+ *           example: USD
+ *         price:
+ *           type: Number
+ *           example: 250.60
+ *         arrival:
+ *           type: string
+ *           format: date
+ *           example: "2023-06-02T12:30:00Z"
+ *         id: 
+ *           type: string
+ *           example: 6478b0eaa559cc7884a58952
  */
 
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     pasajeroGET:
+ *       type: object
+ *       properties:
+ *         name: 
+ *           type: string
+ *           example: Gerson
+ *         LastName:
+ *           type: String
+ *           example: Arcentales
+ *         Age:
+ *           type: Number
+ *           example: 19
+ *         Passport_N:
+ *           type: string
+ *           example: "ZAB000254" 
+ *         Destination:
+ *           type: String
+ *           example: Argentina
+ *         id: 
+ *           type: string
+ *           example: 6478b0eaa559cc7884a58952
+ */
 
 /**
  * @openapi
@@ -37,18 +80,28 @@ const reservasVuelosRouter = express.Router()
  *     reservaVueloGET:
  *       type: object
  *       properties:
- *         destination: 
- *           type: string
- *           example: Argentina
- *         origin:
- *           type: String
- *           example: Peru
  *         passenger:
- *           type: string
- *           example: Gerson Favian
- *         id: 
- *           type: string
- *           example: 6478b0eaa559cc7884a58952
+ *            type: object
+ *            $ref: "#/components/schemas/pasajeroGET"
+ *         bookedFlie:
+ *           type: object
+ *           $ref: "#/components/schemas/vuelosGET"
+ */
+
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     reservaVuelo:
+ *       type: object
+ *       properties:
+ *          passenger:
+ *            type: string
+ *            example: 6478b0eaa559cc7884a58952
+ *          bookedFile:
+ *            type: string
+ *            example: 6478b0eaa559cc7884a58952
  */
 
 
@@ -102,6 +155,68 @@ reservasVuelosRouter.get("/", reservasVuelosControllers.getReservaVuelos)
 *                    $ref: "#/components/schemas/reservaVueloGET"
 */
 reservasVuelosRouter.post("/", reservasVuelosControllers.postReservaVuelos)
+
+/**
+ * @openapi
+ * /vuelosReservas:
+*    put:
+*      tags:
+*        - ReservaDeVuelos
+*      summary: Actualizar una nueva Reserva
+*      requestBody:
+*        description: Los parametros {destination, origin, passenger} son OBLIGATORIOS
+*        content:
+*          application/json:
+*            schema:
+*              $ref: '#/components/schemas/reservaVuelo'
+*        required: true
+*      responses:
+*        '200':
+*          description: successful operation
+*          content:
+*            application/json:
+*              schema:
+*                type: object
+*                properties:
+*                  messagge:
+*                    type: String
+*                    example: La reserva ha sido actualizada.
+*                  data:
+*                    type: object
+*                    $ref: "#/components/schemas/reservaVueloGET"
+*/
+reservasVuelosRouter.put("/", reservasVuelosControllers.putReservaVuelo)
+
+/**
+ * @openapi
+ * /vuelosReservas:
+*    delete:
+*      tags:
+*        - ReservaDeVuelos
+*      summary: Eliminar una nueva reserva.
+*      requestBody:
+*        description: Los parametros {destination, origin, passenger} son OBLIGATORIOS
+*        content:
+*          application/json:
+*            schema:
+*              $ref: '#/components/schemas/reservaVuelo'
+*        required: true
+*      responses:
+*        '200':
+*          description: successful operation
+*          content:
+*            application/json:
+*              schema:
+*                type: object
+*                properties:
+*                  messagge:
+*                    type: String
+*                    example: La reserva ha sido cancelada.
+*                  data:
+*                    type: object
+*                    $ref: "#/components/schemas/reservaVueloGET"
+*/
+reservasVuelosRouter.delete("/", reservasVuelosControllers.deleteReservaVuelo)
 
 
 export default reservasVuelosRouter
