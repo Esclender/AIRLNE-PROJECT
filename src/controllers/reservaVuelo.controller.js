@@ -33,12 +33,13 @@ async function postReservaVuelos(req,res){
 async function putReservaVuelo(req,res){
   try {
     const id = req.params.id
-    await reservaVueloServices.postReservaVuelo(id,req.body)
+    await reservaVueloServices.putReservaVuelo(id,req.body)
     return await res.json({
       message:"la reserva ha sido actualizada."
     })
 
   } catch (error) {
+    console.log(error)
     if(error.cause.status){
       return res.status(error.cause.status).json({
         message:error.message
