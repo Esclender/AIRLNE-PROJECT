@@ -1,17 +1,23 @@
 import mongoose from "mongoose";
 
 const vueloReservaSchema = mongoose.Schema({
-    destination:{
-        type:String,
-        required: true
-    },
-    origin:{
-        type:String,
-        required: true
-    },
     passenger:{
-        type:String,
+      names:{
+        type: String,
         required: true
+      },
+      lastnames:{
+        type: String,
+        required:true
+      },
+      passportN:{
+        type: String,
+        reuired:true
+      }
+    },
+    bookedFlie:{
+      type: Array,
+      required:true
     }
 })
 

@@ -30,8 +30,53 @@ async function postReservaVuelos(req,res){
   }
 }
 
+async function putReservaVuelo(req,res){
+  try {
+    const id = req.params.id
+    await reservaVueloServices.postReservaVuelo(id,req.body)
+    return await res.json({
+      message:"la reserva ha sido actualizada."
+    })
+
+  } catch (error) {
+    if(error.cause.status){
+      return res.status(error.cause.status).json({
+        message:error.message
+      })
+    }
+
+    res.status(500).json({
+      message:error
+    })
+  }
+}
+
+async function deleteReservaVuelo(req,res){
+  try {
+    const id = req.params.id
+    await reservaVueloServices.deleteReservaVuelo(id)
+    return await res.json({
+      message:"La reserva ha sido cancelada."
+    })
+
+  } catch (error) {
+    console.log(error);
+    if(error.cause.status){
+      return res.status(error.cause.status).json({
+        message:error.message
+      })
+    }
+
+    res.status(500).json({
+      message:error
+    })
+  }
+}
+
 
 export default {
   getReservaVuelos,
-  postReservaVuelos
+  postReservaVuelos,
+  putReservaVuelo,
+  deleteReservaVuelo
 }
