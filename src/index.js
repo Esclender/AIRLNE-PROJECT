@@ -14,7 +14,7 @@ import userRoutes from "./routes/auth.js"
 import paqueteVuelo from "./routes/paqueteVuelo.js";
 
 const app = express();
-const PORT = process.env.PORT || 1801;
+const PORT = process.env.PORT || 10801;
 
 app.use(cors());
 app.use(express.json());
@@ -38,6 +38,7 @@ app.use("/categoriasVuelos",vuelosCategories)
 app.use("/vuelosReservas",vuelosReservas)
 app.use("/regularClient",regularCliente)
 app.use("/infoCenter",infoCenter)
+app.use("/paquete",paqueteVuelo)
 app.use("/auth",userRoutes)
 
 

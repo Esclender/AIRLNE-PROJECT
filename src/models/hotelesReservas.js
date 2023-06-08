@@ -17,9 +17,9 @@ const hotelBookingSchema = mongoose.Schema({
 
 hotelBookingSchema.methods = {
   toJson: (schema) => {
-    const {__v, _id, ...vuelo} = schema.toObject()
-    vuelo.id = _id
-    return vuelo
+    const {__v, _id, ...hotel} = schema.toObject()
+    hotel.id = _id
+    return hotel
   }
 }
 

@@ -18,7 +18,15 @@ async function postpaquete(req, res) {
       message: "Paquete registrado",
       data: rst,
     });
+
   } catch (error) {
+    console.log(error)
+    if (error.cause.status) {
+      return res.status(error.cause.status).json({
+        message: error.message,
+      });
+    }
+
     res.status(400).json({
       message: error,
     });
@@ -33,11 +41,11 @@ async function putpaquete(req, res) {
       message: "Info del paquete actualizado.",
     });
   } catch (error) {
-    if (error.cause.status) {
-      return res.status(error.cause.status).json({
-        message: error.message,
-      });
-    }
+    // if (error.cause.status) {
+    //   return res.status(error.cause.status).json({
+    //     message: error.message,
+    //   });
+    // }
 
     res.status(500).json({
       message: error,

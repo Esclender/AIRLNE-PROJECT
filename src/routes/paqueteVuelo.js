@@ -14,73 +14,22 @@ const paqueteRouter = express.Router();
  * @openapi
  * components:
  *   schemas:
- *     vuelosGET:
- *       type: object
- *       properties:
- *         destination:
- *           type: string
- *           example: Argentina
- *         origin:
- *           type: String
- *           example: Perú
- *         roundtrip:
- *           type: Boolean
- *           example: false
- *         exit:
- *           type: string
- *           format: date
- *           example: "2023-06-01T10:30:00Z"
- *         currency:
- *           type: String
- *           example: USD
- *         price:
- *           type: Number
- *           example: 250.60
- *         arrival:
- *           type: string
- *           format: date
- *           example: "2023-06-02T12:30:00Z"
- *         id:
- *           type: string
- *           example: 6478b0eaa559cc7884a58952
- */
-
-/**
- * @openapi
- * components:
- *   schemas:
- *     ReservasHotelesRE:
- *       type: object
- *       properties:
- *         nameHotel:
- *           type: string
- *           example: Hotel Plaza El Bosque Ebro
- *         rating:
- *           type: number
- *           example: 8.8
- *         city:
- *           type: string
- *           example: Santiago de chile
- *         id:
- *           type: string
- *           example: 6478b0eaa559cc7884a58952
- */
-
-/**
- * @openapi
- * components:
- *   schemas:
  *     paquete:
  *       type: object
  *       properties:
+ *         packageName:
+ *           type: string
+ *           example: "Paquete BUENOS AIRES"
  *         avaibleHotels:
- *           type: array
  *           items:
- *                $ref: "#/components/schemas/ReservasHotelesRE"
- *         avaibleFlie:
- *           type: array
+ *              type: string
+ *           example:
+ *             - 6478b0eaa559cc7884a58952
+ *         avaibleFlies:
  *           items:
- *                $ref: "#/components/schemas/vuelosGET"
+ *              type: string
+ *           example:
+ *             - 6478b0eaa559cc7884a58952
  */
 
 /**
@@ -90,11 +39,14 @@ const paqueteRouter = express.Router();
  *     paqueteGET:
  *       type: object
  *       properties:
+ *         packageName:
+ *           type: string
+ *           example: "Paquete BUENOS AIRES"
  *         avaibleHotels:
  *           type: array
  *           items:
  *                $ref: "#/components/schemas/ReservasHotelesRE"
- *         avaibleFlie:
+ *         avaibleFlies:
  *           type: array
  *           items:
  *                $ref: "#/components/schemas/vuelosGET"
@@ -129,9 +81,9 @@ paqueteRouter.get("/", paqueteServices.getpaquete);
  *   post:
  *      tags:
  *        - Paquete
- *      summary: Agregar un pasajero
+ *      summary: Agregar un paquete
  *      requestBody:
- *        description: Los parametros {name,LastName,Age, passport_N, Destination} son OBLIGATORIOS
+ *        description: Para crear un nuevo paquete, debes ingresar en los array los id's de los hoteles y vuelos respectivos, ademas tambien se le debe crear un nombre al paquete.
  *        content:
  *          application/json:
  *            schema:
@@ -147,7 +99,7 @@ paqueteRouter.get("/", paqueteServices.getpaquete);
  *                properties:
  *                  messagge:
  *                    type: String
- *                    example: Pasajero registrado.
+ *                    example: Paquete registrado.
  *                  data:
  *                    type: object
  *                    $ref: "#/components/schemas/paqueteGET"

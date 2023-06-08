@@ -1,21 +1,25 @@
 import mongoose from "mongoose";
 
 const paqueteVueloSchemas = mongoose.Schema({
+  packageName:{
+    type: String,
+    required:true
+  },
   avaibleHotels: {
     type: Array,
     required: true,
   },
-  avaibleFlie: {
+  avaibleFlies: {
     type: Array,
     required: true,
-  },
+  }
 });
 
 paqueteVueloSchemas.methods = {
   toJson: (schema) => {
-    const { __v, _id, ...vuelo } = schema.toObject();
-    vuelo.id = _id;
-    return vuelo;
+    const { __v, _id, ...info } = schema.toObject();
+    info.id = _id;
+    return info;
   },
 };
 

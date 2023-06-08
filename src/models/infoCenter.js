@@ -11,9 +11,9 @@ const infoCenterSchema = mongoose.Schema({
 
 infoCenterSchema.methods = {
   toJson: (schema) => {
-    const {__v, _id, ...vuelo} = schema.toObject()
-    vuelo.id = _id
-    return vuelo
+    const {__v, _id, ...info} = schema.toObject()
+    info.id = _id
+    return info
   }
 }
 
