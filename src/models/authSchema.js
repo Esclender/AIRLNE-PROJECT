@@ -7,7 +7,7 @@ const loginSchema = mongoose.Schema({
     unique: true
   },
   password:{
-    type:Number,
+    type: String,
     required: [true, "The user must have a password"]
   }
 })
