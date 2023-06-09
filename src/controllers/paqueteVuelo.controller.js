@@ -41,11 +41,12 @@ async function putpaquete(req, res) {
       message: "Info del paquete actualizado.",
     });
   } catch (error) {
-    // if (error.cause.status) {
-    //   return res.status(error.cause.status).json({
-    //     message: error.message,
-    //   });
-    // }
+    console.log(error)
+    if (error.cause.status) {
+      return res.status(error.cause.status).json({
+        message: error.message,
+      });
+    }
 
     res.status(500).json({
       message: error,

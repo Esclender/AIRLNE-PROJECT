@@ -13,6 +13,15 @@ const hotelRouter = express.Router()
 */
 
 /**
+* @openapi
+*components:
+*  securitySchemes:
+*    bearerAuth:            
+*      type: http
+*      scheme: bearer
+ */
+
+/**
  * @openapi
  * components:
  *   schemas:
@@ -57,6 +66,8 @@ const hotelRouter = express.Router()
  * @openapi
  * /hotel:
 *    get:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - ReservaDeHoteles
 *      summary: Devuelve un array de hoteles
@@ -77,6 +88,8 @@ hotelRouter.get("/",[validarJwt], bookingServices.getReservasHoteles)
  * @openapi
  * /hotel/reservas:
 *    post:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - ReservaDeHoteles
 *      summary: Crear una reserva de hotel
@@ -109,6 +122,8 @@ hotelRouter.post("/reservas",[validarJwt], bookingServices.postReservasHoteles)
  * @openapi
  * /hotel/reservas/{id}:
 *    put:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - ReservaDeHoteles
 *      summary: Actualizar una reserva de hotel.
@@ -144,6 +159,8 @@ hotelRouter.put("/reservas/:id",[validarJwt], bookingServices.putReservasHoteles
  * @openapi
  * /hotel/reservas/{id}:
 *    delete:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - ReservaDeHoteles
 *      summary: Borrar una reserva

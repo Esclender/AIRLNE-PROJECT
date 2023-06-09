@@ -13,6 +13,15 @@ const pasajeroRouter = express.Router()
 */
 
 /**
+* @openapi
+*components:
+*  securitySchemes:
+*    bearerAuth:            
+*      type: http
+*      scheme: bearer
+ */
+
+/**
  * @openapi
  * components:
  *   schemas:
@@ -63,6 +72,8 @@ const pasajeroRouter = express.Router()
  * @openapi
  * /pasajero:
 *    get:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - pasajero
 *      summary: Devuelve un array de pasajeros
@@ -83,11 +94,13 @@ pasajeroRouter.get("/",[validarJwt], pasajeroServices.getpasajero)
  * @openapi
  * /pasajero:
 *    post:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - pasajero
 *      summary: Agregar un pasajero
 *      requestBody:
-*        description: Los parametros {name,LastName,Age, passport_N, Destination} son OBLIGATORIOS
+*        description: Los parametros {name,LastName,Age, passport_N} son OBLIGATORIOS
 *        content:
 *          application/json:
 *            schema:
@@ -115,6 +128,8 @@ pasajeroRouter.post("/",[validarJwt], pasajeroServices.postpasajero)
  * @openapi
  * /pasajero/{id}:
 *    put:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - pasajero
 *      summary: Actualizar a un pasajero.
@@ -150,6 +165,8 @@ pasajeroRouter.put("/:id",[validarJwt], pasajeroServices.putpasajero)
  * @openapi
  * /pasajero/{id}:
 *    delete:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - pasajero
 *      summary: Borrar a un pasajero

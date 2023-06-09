@@ -7,7 +7,6 @@ async function getinfoCenter(req,res){
     return await res.json(rst)
 
   } catch (error) {
-    console.log(error)
     res.status(404).json({
       message:error
     })

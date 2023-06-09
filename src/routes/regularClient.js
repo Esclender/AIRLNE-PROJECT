@@ -1,5 +1,6 @@
 import express from "express"
 import regularClientServices from "../controllers/regularClient.controller.js";
+import validarJwt from "../middleware/validateJwt.js"
 
 const regularClienteRouter = express.Router()
 
@@ -10,6 +11,15 @@ const regularClienteRouter = express.Router()
 *  - name: ClienteFrecuente
 *    description: Endpoints para obtener todos los Clientes que usan la aerolina con frecuencia.
 */
+
+/**
+* @openapi
+*components:
+*  securitySchemes:
+*    bearerAuth:            
+*      type: http
+*      scheme: bearer
+ */
 
 /**
  * @openapi
@@ -50,6 +60,8 @@ const regularClienteRouter = express.Router()
  * @openapi
  * /regularClient:
 *    get:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - ClienteFrecuente
 *      summary: Devuelve un array de ClienteFrecuente
@@ -64,12 +76,14 @@ const regularClienteRouter = express.Router()
 *                    $ref: "#/components/schemas/ClienteFrecuenteGET"
 */
 
-regularClienteRouter.get("/", regularClientServices.getRegularClient)
+regularClienteRouter.get("/",[validarJwt], regularClientServices.getRegularClient)
 
 /**
  * @openapi
  * /regularClient:
 *    post:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - ClienteFrecuente
 *      summary: Agregar un pasajero
@@ -95,13 +109,15 @@ regularClienteRouter.get("/", regularClientServices.getRegularClient)
 *                    type: object
 *                    $ref: "#/components/schemas/ClienteFrecuenteGET"
 */
-regularClienteRouter.post("/", regularClientServices.postRegularClient)
+regularClienteRouter.post("/",[validarJwt], regularClientServices.postRegularClient)
 
 
 /**
  * @openapi
  * /regularClient/{id}:
 *    put:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - ClienteFrecuente
 *      summary: Actualizar a un cliente.
@@ -131,12 +147,14 @@ regularClienteRouter.post("/", regularClientServices.postRegularClient)
 *                    type: String
 *                    example: Info del Cliente fue actualizada.
 */
-regularClienteRouter.put("/:id", regularClientServices.putRegularClient)
+regularClienteRouter.put("/:id",[validarJwt], regularClientServices.putRegularClient)
 
 /**
  * @openapi
  * /regularClient/{id}:
 *    delete:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - ClienteFrecuente
 *      summary: Sancionar a un cliente 
@@ -159,6 +177,6 @@ regularClienteRouter.put("/:id", regularClientServices.putRegularClient)
 *                    type: String
 *                    example: El cliente ha sido sancionado.
 */
-regularClienteRouter.delete("/:id", regularClientServices.deleteRegularClient)
+regularClienteRouter.delete("/:id",[validarJwt], regularClientServices.deleteRegularClient)
 
 export default regularClienteRouter

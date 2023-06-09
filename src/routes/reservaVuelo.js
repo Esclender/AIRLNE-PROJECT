@@ -1,5 +1,6 @@
 import express from "express"
 import reservasVuelosControllers from "../controllers/reservaVuelo.controller.js";
+import validarJwt from "../middleware/validateJwt.js"
 
 const reservasVuelosRouter = express.Router()
 
@@ -10,6 +11,15 @@ const reservasVuelosRouter = express.Router()
 *  - name: ReservaDeVuelos
 *    description: Endpoints para obtener todas las reservas de vuelo hechas.
 */
+
+/**
+* @openapi
+*components:
+*  securitySchemes:
+*    bearerAuth:            
+*      type: http
+*      scheme: bearer
+ */
 
 
 /**
@@ -51,6 +61,8 @@ const reservasVuelosRouter = express.Router()
  * @openapi
  * /vuelosReservas:
 *    get:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - ReservaDeVuelos
 *      summary: Devuelve un array de las reservass de vuelos actuales.
@@ -65,12 +77,14 @@ const reservasVuelosRouter = express.Router()
 *                    $ref: "#/components/schemas/reservaVueloGET"
 */
 
-reservasVuelosRouter.get("/", reservasVuelosControllers.getReservaVuelos)
+reservasVuelosRouter.get("/",[validarJwt], reservasVuelosControllers.getReservaVuelos)
 
 /**
  * @openapi
  * /vuelosReservas:
 *    post:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - ReservaDeVuelos
 *      summary: Agregar una nueva reserva.
@@ -104,12 +118,14 @@ reservasVuelosRouter.get("/", reservasVuelosControllers.getReservaVuelos)
 *                    type: object
 *                    $ref: "#/components/schemas/reservaVueloGET"
 */
-reservasVuelosRouter.post("/", reservasVuelosControllers.postReservaVuelos)
+reservasVuelosRouter.post("/",[validarJwt], reservasVuelosControllers.postReservaVuelos)
 
 /**
  * @openapi
  * /vuelosReservas/{id}:
 *    put:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - ReservaDeVuelos
 *      summary: Actualizar una reserva, solo se podra modificar el vuelo de un pasajero que ya tenga una reserva.
@@ -141,12 +157,14 @@ reservasVuelosRouter.post("/", reservasVuelosControllers.postReservaVuelos)
 *               type: object
 *               example: Reserva actualizada
 */
-reservasVuelosRouter.put("/:id", reservasVuelosControllers.putReservaVuelo)
+reservasVuelosRouter.put("/:id",[validarJwt], reservasVuelosControllers.putReservaVuelo)
 
 /**
  * @openapi
  * /vuelosReservas/{id}:
 *    delete:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - ReservaDeVuelos
 *      summary: Actualizar una reserva, solo se podra modificar el vuelo de un pasajero que ya tenga una reserva.
@@ -166,7 +184,7 @@ reservasVuelosRouter.put("/:id", reservasVuelosControllers.putReservaVuelo)
 *               type: object
 *               example: Reserva eliminado
 */
-reservasVuelosRouter.delete("/:id", reservasVuelosControllers.deleteReservaVuelo)
+reservasVuelosRouter.delete("/:id",[validarJwt], reservasVuelosControllers.deleteReservaVuelo)
 
 
 export default reservasVuelosRouter

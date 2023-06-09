@@ -13,6 +13,15 @@ const categoriasVuelosRuter = express.Router()
 */
 
 /**
+* @openapi
+*components:
+*  securitySchemes:
+*    bearerAuth:            
+*      type: http
+*      scheme: bearer
+ */
+
+/**
  * @openapi
  * components:
  *   schemas:
@@ -80,6 +89,8 @@ const categoriasVuelosRuter = express.Router()
  * @openapi
  * /categoriasVuelos:
 *    get:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - CategoriasDeVuelos
 *      summary: Devuelve un array de todas las categorías actuales
@@ -100,6 +111,8 @@ categoriasVuelosRuter.get("/",[validarJwt], categoriasVservices.getcategoriasVue
  * @openapi
  * /categoriasVuelos:
 *    post:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - CategoriasDeVuelos
 *      summary: Añadir una nueva categoria
@@ -132,6 +145,8 @@ categoriasVuelosRuter.post("/",[validarJwt], categoriasVservices.postcategoriasV
  * @openapi
  * /categoriasVuelos/{id}:
 *    put:
+*      security:
+*        - bearerAuth: []
 *      tags: 
 *        - CategoriasDeVuelos
 *      summary: Actualizar una categoria.
@@ -167,6 +182,8 @@ categoriasVuelosRuter.put("/:id",[validarJwt], categoriasVservices.putcategorias
  * @openapi
  * /categoriasVuelos/{id}:
 *    delete:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - CategoriasDeVuelos
 *      summary: Borrar una categoria de vuelo

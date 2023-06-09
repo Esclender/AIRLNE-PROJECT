@@ -1,5 +1,6 @@
 import express from "express";
 import paqueteServices from "../controllers/paqueteVuelo.controller.js";
+import validarJwt from "../middleware/validateJwt.js"
 
 const paqueteRouter = express.Router();
 
@@ -8,6 +9,15 @@ const paqueteRouter = express.Router();
  * tags:
  *  - name: Paquete
  *    description: Endpoints para obtener todos los paquetes.
+ */
+
+/**
+* @openapi
+*components:
+*  securitySchemes:
+*    bearerAuth:            
+*      type: http
+*      scheme: bearer
  */
 
 /**
@@ -59,6 +69,8 @@ const paqueteRouter = express.Router();
  * @openapi
  * /paquete:
  *   get:
+*      security:
+*        - bearerAuth: []
  *      tags:
  *        - Paquete
  *      summary: Devuelve un array de paquete
@@ -73,12 +85,14 @@ const paqueteRouter = express.Router();
  *                    $ref: "#/components/schemas/paqueteGET"
  */
 
-paqueteRouter.get("/", paqueteServices.getpaquete);
+paqueteRouter.get("/",[validarJwt], paqueteServices.getpaquete);
 
 /**
  * @openapi
  * /paquete:
  *   post:
+*      security:
+*        - bearerAuth: []
  *      tags:
  *        - Paquete
  *      summary: Agregar un paquete
@@ -104,12 +118,14 @@ paqueteRouter.get("/", paqueteServices.getpaquete);
  *                    type: object
  *                    $ref: "#/components/schemas/paqueteGET"
  */
-paqueteRouter.post("/", paqueteServices.postpaquete);
+paqueteRouter.post("/",[validarJwt], paqueteServices.postpaquete);
 
 /**
  * @openapi
  * /paquete/{id}:
  *    put:
+*      security:
+*        - bearerAuth: []
  *      tags:
  *        - Paquete
  *      summary: Actualizar el paquete.
@@ -139,12 +155,14 @@ paqueteRouter.post("/", paqueteServices.postpaquete);
  *                    type: String
  *                    example: Info del Paquete fue actualizada.
  */
-paqueteRouter.put("/:id", paqueteServices.putpaquete);
+paqueteRouter.put("/:id",[validarJwt], paqueteServices.putpaquete);
 
 /**
  * @openapi
  * /paquete/{id}:
  *   delete:
+*      security:
+*        - bearerAuth: []
  *      tags:
  *        - Paquete
  *      summary: Borrar a un pasajero
@@ -167,6 +185,6 @@ paqueteRouter.put("/:id", paqueteServices.putpaquete);
  *                    type: String
  *                    example: El paquete fue eliminado.
  */
-paqueteRouter.delete("/:id", paqueteServices.deletepaquete);
+paqueteRouter.delete("/:id",[validarJwt], paqueteServices.deletepaquete);
 
 export default paqueteRouter;

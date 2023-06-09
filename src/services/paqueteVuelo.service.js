@@ -21,7 +21,7 @@ async function postPaquete(body) {
   body.avaibleFlies = await Promise.all(avaibleFlies.map(async id => await modelVuelo.get(id)));
   const isNull = body.avaibleFlies.some(v => v == null) || body.avaibleHotels.some(v => v == null)
 
-  if (isNull) throw new BaseRequestException("Check if all the id's inserted exist.")
+  if (isNull) throw new BaseRequestException("Revisa si todos los vuelos o hoteles ingresados estan disponibles.")
   
   const rst = await model.post(body);
   return await rst.toJson(rst);
@@ -32,12 +32,12 @@ async function putPaquete(id, body) {
     if (avaible == "avaibleHotels") {
       body[avaible] = await Promise.all(body[avaible].map(async id => await modelHotel.get(id)))
     }else if(avaible == "avaibleFlies"){
-      body[avaible] = await Promise.all(body[avaible].map(async id => await modelFlie.get(id)))
+      body[avaible] = await Promise.all(body[avaible].map(async id => await modelVuelo.get(id)))
     }
   }
   const isNull = body.avaibleFlies.some(v => v == null) || body.avaibleHotels.some(v => v == null)
 
-  if (isNull) throw new BaseRequestException("Check if all the id's inserted exist.")
+  if (isNull) throw new BaseRequestException("Revisa si todos los vuelos o hoteles ingresados estan disponibles.")
   
   const rst = await model.put(id, body);
   if (!rst.modifiedCount) throw new BaseException("Paquete not found", 404);

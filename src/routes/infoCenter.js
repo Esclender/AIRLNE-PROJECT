@@ -1,5 +1,6 @@
 import express from "express"
 import infoCenterServices from "../controllers/infoCenter.controller.js";
+import validarJwt from "../middleware/validateJwt.js";
 
 const infoCenterRouter = express.Router()
 
@@ -10,6 +11,15 @@ const infoCenterRouter = express.Router()
 *  - name: CentroInformativo
 *    description: Endpoints para obtener todos los medios de comunicacion para la aerolinea.
 */
+
+/**
+* @openapi
+*components:
+*  securitySchemes:
+*    bearerAuth:            
+*      type: http
+*      scheme: bearer
+ */
 
 /**
  * @openapi
@@ -62,6 +72,8 @@ const infoCenterRouter = express.Router()
  * @openapi
  * /infoCenter:
 *    get:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - CentroInformativo
 *      summary: Devuelve un array de informacion
@@ -76,12 +88,14 @@ const infoCenterRouter = express.Router()
 *                    $ref: "#/components/schemas/CentroInformativoGET"
 */
 
-infoCenterRouter.get("/", infoCenterServices.getinfoCenter)
+infoCenterRouter.get("/",[validarJwt], infoCenterServices.getinfoCenter)
 
 /**
  * @openapi
  * /infoCenter:
 *    post:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - CentroInformativo
 *      summary: Agregar informacion
@@ -107,13 +121,15 @@ infoCenterRouter.get("/", infoCenterServices.getinfoCenter)
 *                    type: object
 *                    $ref: "#/components/schemas/CentroInformativoGET"
 */
-infoCenterRouter.post("/", infoCenterServices.postinfoCenter)
+infoCenterRouter.post("/",[validarJwt], infoCenterServices.postinfoCenter)
 
 
 /**
  * @openapi
  * /infoCenter/{id}:
 *    put:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - CentroInformativo
 *      summary: Actualizar la informacion.
@@ -143,12 +159,14 @@ infoCenterRouter.post("/", infoCenterServices.postinfoCenter)
 *                    type: String
 *                    example: La Info fue actualizada.
 */
-infoCenterRouter.put("/:id", infoCenterServices.putinfoCenter)
+infoCenterRouter.put("/:id",[validarJwt], infoCenterServices.putinfoCenter)
 
 /**
  * @openapi
  * /infoCenter/{id}:
 *    delete:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - CentroInformativo
 *      summary: Borrar la informacion
@@ -171,6 +189,6 @@ infoCenterRouter.put("/:id", infoCenterServices.putinfoCenter)
 *                    type: String
 *                    example: La info ha sido eliminada.
 */
-infoCenterRouter.delete("/:id", infoCenterServices.deleteinfoCenter)
+infoCenterRouter.delete("/:id",[validarJwt], infoCenterServices.deleteinfoCenter)
 
 export default infoCenterRouter
