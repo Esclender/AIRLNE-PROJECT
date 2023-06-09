@@ -3,6 +3,9 @@ import categoriasVservices from "../controllers/categoriasVuelos.controller.js";
 import validarJwt from "../middleware/validateJwt.js";
 
 const categoriasVuelosRuter = express.Router()
+const fieldsToValidate = (req, res) => {
+  const fields = []
+}
 
 
 /**
