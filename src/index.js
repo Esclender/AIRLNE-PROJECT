@@ -14,7 +14,7 @@ import userRoutes from "./routes/auth.js"
 import paqueteVuelo from "./routes/paqueteVuelo.js";
 
 const app = express();
-const PORT = process.env.PORT || 1801;
+const PORT = process.env.PORT || 10801;
 
 app.use(cors());
 app.use(express.json());

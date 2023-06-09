@@ -18,9 +18,18 @@ const infoCenterRouter = express.Router()
  *     CentroInformativo:
  *       type: object
  *       properties:
- *         contactNumbers: 
- *           type: Array
- *           example: []
+ *         center: 
+ *           type: string
+ *           example: Embarque
+ *         description: 
+ *           type: string
+ *           example: Descubre qué necesitas en nuestro nuevo proceso de embarque por grupos…
+ *         contacts: 
+ *           items:
+ *              type: string
+ *           example:
+ *             - "+56 928 590 695"
+ *             - "+51 556 789 412"
  */
 
 
@@ -31,9 +40,18 @@ const infoCenterRouter = express.Router()
  *     CentroInformativoGET:
  *       type: object
  *       properties:
- *         contactNumbers: 
- *           type: Array
- *           example: []
+ *         center: 
+ *           type: string
+ *           example: Embarque
+ *         description: 
+ *           type: string
+ *           example: Descubre qué necesitas en nuestro nuevo proceso de embarque por grupos…
+ *         contacts: 
+ *           items:
+ *              type: string
+ *           example:
+ *             - "+56 928 590 695"
+ *             - "+51 556 789 412"
  *         id: 
  *           type: string
  *           example: 6478b0eaa559cc7884a58952
@@ -68,7 +86,7 @@ infoCenterRouter.get("/", infoCenterServices.getinfoCenter)
 *        - CentroInformativo
 *      summary: Agregar informacion
 *      requestBody:
-*        description: Los parametros {name,LastName,Age, passport_N, Destination} son OBLIGATORIOS
+*        description: Los parametros {center,description,contacts} son OBLIGATORIOS
 *        content:
 *          application/json:
 *            schema:
@@ -94,14 +112,14 @@ infoCenterRouter.post("/", infoCenterServices.postinfoCenter)
 
 /**
  * @openapi
- * /CentroInformativo/{id}:
+ * /infoCenter/{id}:
 *    put:
 *      tags:
 *        - CentroInformativo
 *      summary: Actualizar la informacion.
 *      parameters:
 *        - name: id
-*          description: Ingresa el id de la ifo actualizada
+*          description: Ingresa el id de la info a actualizar
 *          in: path
 *          required: true
 *          schema:
@@ -129,7 +147,7 @@ infoCenterRouter.put("/:id", infoCenterServices.putinfoCenter)
 
 /**
  * @openapi
- * /CentroInformativo/{id}:
+ * /infoCenter/{id}:
 *    delete:
 *      tags:
 *        - CentroInformativo

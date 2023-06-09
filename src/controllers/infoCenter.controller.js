@@ -3,10 +3,11 @@ import infoCenterServices from "../services/infoCenter.service.js"
 async function getinfoCenter(req,res){
   try {
 
-    const rst = await infoCenterServices.getinfoCenter()
+    const rst = await infoCenterServices.getInfoCenter()
     return await res.json(rst)
 
   } catch (error) {
+    console.log(error)
     res.status(404).json({
       message:error
     })
@@ -16,7 +17,7 @@ async function getinfoCenter(req,res){
 async function postinfoCenter(req,res){
   try {
     
-    const rst = await infoCenterServices.postinfoCenter(req.body)
+    const rst = await infoCenterServices.postInfoCenter(req.body)
     return await res.status(201).json({
       message:"Información registrada",
       data:rst
@@ -32,9 +33,9 @@ async function postinfoCenter(req,res){
 async function putinfoCenter(req,res){
   try {
     const id = req.params.id
-    await infoCenterServices.putinfoCenter(id,req.body)
+    await infoCenterServices.putInfoCenter(id,req.body)
     return await res.json({
-      message:"Info del Pasajero actualizada."
+      message:"Informacion actualizada."
     })
 
   } catch (error) {
@@ -53,7 +54,7 @@ async function putinfoCenter(req,res){
 async function deleteinfoCenter(req,res){
   try {
     const id = req.params.id
-    await infoCenterServices.deleteinfoCenter(id)
+    await infoCenterServices.deleteInfoCenter(id)
     return await res.json({
       message:"La Info ha sido eliminado."
     })
