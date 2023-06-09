@@ -1,10 +1,18 @@
 import mongoose from "mongoose";
 
 const infoCenterSchema = mongoose.Schema({
-    contactNumbers:{
-        type:Array,
-        required: true
-    }
+  center:{
+    type:String,
+    required: true
+  },
+  description:{
+    type: String,
+    required: true
+  },
+  contacts:{
+    type:Array,
+    required: true
+  }
 })
 
 
@@ -17,6 +25,6 @@ infoCenterSchema.methods = {
   }
 }
 
-const infoCenter = mongoose.model("infocenter", infoCenterSchema)
+const infoCenter = mongoose.model("infocenters", infoCenterSchema)
 
 export default infoCenter

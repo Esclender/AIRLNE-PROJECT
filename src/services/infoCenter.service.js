@@ -17,13 +17,13 @@ async function postInfoCenter(body){
 
 async function putInfoCenter(id, body){
   const rst = await model.put(id,body)
-  if(!rst.modifiedCount) throw new BaseException("Info not found", 404);
+  if(!rst.modifiedCount) throw new BaseException("Center not found", 404);
   return rst
 }
 
 async function deleteInfoCenter(id){
   const rst = await model.delete(id)
-  if(!rst.deletedCount) throw new BaseException("Info not found", 404);
+  if(!rst.deletedCount) throw new BaseException("Center not found", 404);
   return rst
 }
 
