@@ -3,11 +3,28 @@ import hotelSchema from "../models/hotelesReservas.js";
 import vueloSchema from "../models/vuelos.js";
 import db from "../database/project.module.js";
 import BaseException from "../exceptions/baseExceptions.module.js";
-import BaseRequestException from "../exceptions/baseRequestExceptions.module.js";
+import validateFields from "../utils/validatePackageFilter.js";
 
 const model = new db(paqueteSchema);
 const modelHotel = new db(hotelSchema);
 const modelVuelo = new db(vueloSchema);
+
+const checkAvaibles = async (avaibleDates, body) => {
+  const fliesResults = await modelVuelo.get();
+  const HotelsResults = await modelHotel.get();
+
+  const avaibleFlies = fliesResults.filter((v) =>
+    validateFields.isFlieAvaible(v, avaibleDates, body)
+  );
+  const avaibleHotels = HotelsResults.filter((h) => {
+    if (!h.city.toUpperCase().includes(body.destination.toUpperCase())) {
+      return false;
+    }
+    return true;
+  });
+
+  return { avaibleFlies, avaibleHotels };
+};
 
 async function getPaquete() {
   const rst = await model.get();
@@ -16,30 +33,37 @@ async function getPaquete() {
 }
 
 async function postPaquete(body) {
-  const {avaibleHotels,avaibleFlies} = body
-  body.avaibleHotels = await Promise.all(avaibleHotels.map(async id => await modelHotel.get(id)));
-  body.avaibleFlies = await Promise.all(avaibleFlies.map(async id => await modelVuelo.get(id)));
-  const isNull = body.avaibleFlies.some(v => v == null) || body.avaibleHotels.some(v => v == null)
+  const { avaibleDates } = body;
+  const result = await checkAvaibles(avaibleDates, body);
 
-  if (isNull) throw new BaseRequestException("Revisa si todos los vuelos o hoteles ingresados estan disponibles.")
-  
-  const rst = await model.post(body);
+  const newPack = {
+    ...body,
+    ...result,
+  };
+
+  const rst = await model.post(newPack);
   return await rst.toJson(rst);
 }
 
 async function putPaquete(id, body) {
-  for (let avaible in body) {
-    if (avaible == "avaibleHotels") {
-      body[avaible] = await Promise.all(body[avaible].map(async id => await modelHotel.get(id)))
-    }else if(avaible == "avaibleFlies"){
-      body[avaible] = await Promise.all(body[avaible].map(async id => await modelVuelo.get(id)))
-    }
+  const actPackage = await model.get(id);
+  const oldPack = {
+    ...actPackage._doc,
+    ...body,
+  };
+  let updatedPack = {
+    ...oldPack,
+  };
+  if (oldPack.avaibleDates) {
+    const result = await checkAvaibles(oldPack.avaibleDates, oldPack);
+    updatedPack = {
+      ...oldPack,
+      ...result,
+    };
   }
-  const isNull = body.avaibleFlies.some(v => v == null) || body.avaibleHotels.some(v => v == null)
 
-  if (isNull) throw new BaseRequestException("Revisa si todos los vuelos o hoteles ingresados estan disponibles.")
-  
-  const rst = await model.put(id, body);
+  const rst = await model.put(id, updatedPack);
+  console.log(rst);
   if (!rst.modifiedCount) throw new BaseException("Paquete not found", 404);
   return rst;
 }
