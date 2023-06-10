@@ -58,4 +58,33 @@ const Router = express.Router()
 
 Router.post("/login", loginController.loginUser)
 
+/**
+ * @openapi
+ * /auth/register:
+*    post:
+*      tags:
+*        - auth
+*      summary: Registrarte
+*      requestBody:
+*        description: Los parametros {email, password} son OBLIGATORIOS
+*        content:
+*          application/json:
+*            schema:
+*              $ref: '#/components/schemas/creddentials'
+*        required: true
+*      responses:
+*        '200':
+*          description: successful operation
+*          content:
+*            application/json:
+*              schema:
+*                type: object
+*                properties:
+*                  messagge:
+*                    type: String
+*                    example: Usuario registrado.
+*/
+
+Router.post("/register", loginController.registerUser)
+
 export default Router
