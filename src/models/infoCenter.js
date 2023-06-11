@@ -1,19 +1,23 @@
 import mongoose from "mongoose";
 
+
 const infoCenterSchema = mongoose.Schema({
-  center:{
-    type:String,
+  userData:{
+    type:Object,
     required: true
   },
-  description:{
+  comment:{
     type: String,
     required: true
   },
-  contacts:{
-    type:Array,
+  claimType:{
+    type:String,
     required: true
   }
-})
+}, { timestamps: true })
+
+
+
 
 
 
@@ -25,6 +29,10 @@ infoCenterSchema.methods = {
   }
 }
 
+
 const infoCenter = mongoose.model("infocenters", infoCenterSchema)
 
+
 export default infoCenter
+
+
