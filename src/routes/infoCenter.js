@@ -27,15 +27,6 @@ const infoCenterRouter = express.Router()
 
 
 /**
-* @openapi
-*components:
-*  securitySchemes:
-*    bearerAuth:            
-*      type: http
-*      scheme: bearer
- */
-
-/**
  * @openapi
  * components:
  *   schemas:
@@ -100,8 +91,8 @@ const infoCenterRouter = express.Router()
 *                    $ref: "#/components/schemas/CentroInformativoGET"
 */
 
-infoCenterRouter.get("/",[validarJwt], infoCenterServices.getinfoCenter)
 
+infoCenterRouter.get("/",[validarJwt], infoCenterServices.getinfoCenter)
 
 
 /**
@@ -183,12 +174,6 @@ infoCenterRouter.post("/",[validarJwt], infoCenterServices.postinfoCenter)
 *          required: true
 *          schema:
 *            type: string
-*        - name: problems
-*          description: Campos a tomar en cuenta para los problemas a ingresar
-*          in: path
-*          required: true
-*          schema:
-*            type: string
 *      requestBody:
 *        description: Parametro a actualizar
 *        content:
@@ -243,3 +228,5 @@ infoCenterRouter.delete("/:id",[validarJwt], infoCenterServices.deleteinfoCenter
 
 
 export default infoCenterRouter
+
+
