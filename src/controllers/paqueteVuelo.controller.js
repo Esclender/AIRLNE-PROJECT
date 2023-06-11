@@ -1,5 +1,6 @@
 import paqueteServices from "../services/paqueteVuelo.service.js";
 
+
 async function getpaquete(req, res) {
   try {
     const rst = await paqueteServices.getPaquete();
@@ -11,6 +12,7 @@ async function getpaquete(req, res) {
   }
 }
 
+
 async function postpaquete(req, res) {
   try {
     const rst = await paqueteServices.postPaquete(req.body);
@@ -18,19 +20,23 @@ async function postpaquete(req, res) {
       message: "Paquete registrado",
       data: rst,
     });
+
+
   } catch (error) {
-    console.log(error);
+    console.log(error)
     if (error.cause.status) {
       return res.status(error.cause.status).json({
         message: error.message,
       });
     }
 
+
     res.status(400).json({
       message: error,
     });
   }
 }
+
 
 async function putpaquete(req, res) {
   try {
@@ -40,18 +46,20 @@ async function putpaquete(req, res) {
       message: "Info del paquete actualizado.",
     });
   } catch (error) {
-    console.log(error);
+    console.log(error)
     if (error.cause.status) {
       return res.status(error.cause.status).json({
         message: error.message,
       });
     }
 
+
     res.status(500).json({
       message: error,
     });
   }
 }
+
 
 async function deletepaquete(req, res) {
   try {
@@ -68,11 +76,13 @@ async function deletepaquete(req, res) {
       });
     }
 
+
     res.status(500).json({
       message: error,
     });
   }
 }
+
 
 export default {
   getpaquete,
