@@ -18,9 +18,8 @@ async function postpaquete(req, res) {
       message: "Paquete registrado",
       data: rst,
     });
-
   } catch (error) {
-    console.log(error)
+    console.log(error);
     if (error.cause.status) {
       return res.status(error.cause.status).json({
         message: error.message,
@@ -41,7 +40,7 @@ async function putpaquete(req, res) {
       message: "Info del paquete actualizado.",
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     if (error.cause.status) {
       return res.status(error.cause.status).json({
         message: error.message,
