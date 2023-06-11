@@ -1,7 +1,5 @@
 import express from "express";
 import paqueteServices from "../controllers/paqueteVuelo.controller.js";
-import validarJwt from "../middleware/validateJwt.js"
-
 
 const paqueteRouter = express.Router();
 
@@ -13,14 +11,60 @@ const paqueteRouter = express.Router();
  *    description: Endpoints para obtener todos los paquetes.
  */
 
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     vuelosGET:
+ *       type: object
+ *       properties:
+ *         destination:
+ *           type: string
+ *           example: Argentina
+ *         origin:
+ *           type: String
+ *           example: Perú
+ *         roundtrip:
+ *           type: Boolean
+ *           example: false
+ *         exit:
+ *           type: string
+ *           format: date
+ *           example: "2023-06-01T10:30:00Z"
+ *         currency:
+ *           type: String
+ *           example: USD
+ *         price:
+ *           type: Number
+ *           example: 250.60
+ *         arrival:
+ *           type: string
+ *           format: date
+ *           example: "2023-06-02T12:30:00Z"
+ *         id:
+ *           type: string
+ *           example: 6478b0eaa559cc7884a58952
+ */
 
 /**
-* @openapi
-*components:
-*  securitySchemes:
-*    bearerAuth:            
-*      type: http
-*      scheme: bearer
+ * @openapi
+ * components:
+ *   schemas:
+ *     ReservasHotelesRE:
+ *       type: object
+ *       properties:
+ *         nameHotel:
+ *           type: string
+ *           example: Hotel Plaza El Bosque Ebro
+ *         rating:
+ *           type: number
+ *           example: 8.8
+ *         city:
+ *           type: string
+ *           example: Santiago de chile
+ *         id:
+ *           type: string
+ *           example: 6478b0eaa559cc7884a58952
  */
 
 
@@ -31,18 +75,14 @@ const paqueteRouter = express.Router();
  *     paquete:
  *       type: object
  *       properties:
- *         packageName:
- *           type: string
- *           example: "Paquete BUENOS AIRES"
- *         origin:
- *           type: string
- *           example: Peru
- *         destination:
- *           type: string
- *           example: Argentina
- *         avaibleDates:
- *           type: object
- *           example: {"since": "2023-07-09T10:30:00.000+00:00","to":"2023-07-12T13:30:00.000+00:00"}
+ *         avaibleHotels:
+ *           type: array
+ *           items:
+ *                $ref: "#/components/schemas/ReservasHotelesRE"
+ *         avaibleFlie:
+ *           type: array
+ *           items:
+ *                $ref: "#/components/schemas/vuelosGET"
  */
 
 
@@ -53,24 +93,6 @@ const paqueteRouter = express.Router();
  *     paqueteGET:
  *       type: object
  *       properties:
- *         packageName:
- *           type: string
- *           example: "Paquete BUENOS AIRES"
- *         origin:
- *           type: string
- *           example: Peru
- *         destination:
- *           type: string
- *           example: Argentina
- *         avaibleDates:
- *           type: object
- *           example: {"since": "2023-07-09T10:30:00.000+00:00","to":"2023-07-12T13:30:00.000+00:00"}
- *         endingDate:
- *           type: date
- *           example: "2023-07-12T13:30:00.000+00:00"
- *         status:
- *           type: boolean
- *           example: true
  *         avaibleHotels:
  *           type: array
  *           items:
@@ -105,8 +127,7 @@ const paqueteRouter = express.Router();
  *                    $ref: "#/components/schemas/paqueteGET"
  */
 
-
-paqueteRouter.get("/",[validarJwt], paqueteServices.getpaquete);
+paqueteRouter.get("/", paqueteServices.getpaquete);
 
 
 /**

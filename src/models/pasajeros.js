@@ -21,9 +21,9 @@ const pasajeroSchema = mongoose.Schema({
 
 pasajeroSchema.methods = {
   toJson: (schema) => {
-    const {__v, _id, ...vuelo} = schema.toObject()
-    vuelo.id = _id
-    return vuelo
+    const {__v, _id, ...pass} = schema.toObject()
+    pass.id = _id
+    return pass
   }
 }
 

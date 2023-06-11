@@ -27,6 +27,15 @@ const infoCenterRouter = express.Router()
 
 
 /**
+* @openapi
+*components:
+*  securitySchemes:
+*    bearerAuth:            
+*      type: http
+*      scheme: bearer
+ */
+
+/**
  * @openapi
  * components:
  *   schemas:
@@ -91,8 +100,8 @@ const infoCenterRouter = express.Router()
 *                    $ref: "#/components/schemas/CentroInformativoGET"
 */
 
-
 infoCenterRouter.get("/",[validarJwt], infoCenterServices.getinfoCenter)
+
 
 
 /**

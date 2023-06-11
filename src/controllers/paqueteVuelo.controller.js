@@ -19,6 +19,13 @@ async function postpaquete(req, res) {
       data: rst,
     });
   } catch (error) {
+    console.log(error);
+    if (error.cause.status) {
+      return res.status(error.cause.status).json({
+        message: error.message,
+      });
+    }
+
     res.status(400).json({
       message: error,
     });
@@ -33,6 +40,7 @@ async function putpaquete(req, res) {
       message: "Info del paquete actualizado.",
     });
   } catch (error) {
+    console.log(error);
     if (error.cause.status) {
       return res.status(error.cause.status).json({
         message: error.message,

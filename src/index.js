@@ -39,6 +39,7 @@ app.use("/categoriasVuelos",vuelosCategories)
 app.use("/vuelosReservas",vuelosReservas)
 app.use("/regularClient",regularCliente)
 app.use("/infoCenter",infoCenter)
+app.use("/paquete",paqueteVuelo)
 app.use("/auth",userRoutes)
 
 
