@@ -2,7 +2,9 @@ import express from "express";
 import paqueteServices from "../controllers/paqueteVuelo.controller.js";
 import validarJwt from "../middleware/validateJwt.js"
 
+
 const paqueteRouter = express.Router();
+
 
 /**
  * @openapi
@@ -10,6 +12,7 @@ const paqueteRouter = express.Router();
  *  - name: Paquete
  *    description: Endpoints para obtener todos los paquetes.
  */
+
 
 /**
 * @openapi
@@ -19,6 +22,7 @@ const paqueteRouter = express.Router();
 *      type: http
 *      scheme: bearer
  */
+
 
 /**
  * @openapi
@@ -30,17 +34,17 @@ const paqueteRouter = express.Router();
  *         packageName:
  *           type: string
  *           example: "Paquete BUENOS AIRES"
- *         avaibleHotels:
- *           items:
- *              type: string
- *           example:
- *             - 6478b0eaa559cc7884a58952
- *         avaibleFlies:
- *           items:
- *              type: string
- *           example:
- *             - 6478b0eaa559cc7884a58952
+ *         origin:
+ *           type: string
+ *           example: Peru
+ *         destination:
+ *           type: string
+ *           example: Argentina
+ *         avaibleDates:
+ *           type: object
+ *           example: {"since": "2023-07-09T10:30:00.000+00:00","to":"2023-07-12T13:30:00.000+00:00"}
  */
+
 
 /**
  * @openapi
@@ -52,6 +56,21 @@ const paqueteRouter = express.Router();
  *         packageName:
  *           type: string
  *           example: "Paquete BUENOS AIRES"
+ *         origin:
+ *           type: string
+ *           example: Peru
+ *         destination:
+ *           type: string
+ *           example: Argentina
+ *         avaibleDates:
+ *           type: object
+ *           example: {"since": "2023-07-09T10:30:00.000+00:00","to":"2023-07-12T13:30:00.000+00:00"}
+ *         endingDate:
+ *           type: date
+ *           example: "2023-07-12T13:30:00.000+00:00"
+ *         status:
+ *           type: boolean
+ *           example: true
  *         avaibleHotels:
  *           type: array
  *           items:
@@ -65,6 +84,7 @@ const paqueteRouter = express.Router();
  *           example: 6478b0eaa559cc7884a58952
  */
 
+
 /**
  * @openapi
  * /paquete:
@@ -73,7 +93,7 @@ const paqueteRouter = express.Router();
 *        - bearerAuth: []
  *      tags:
  *        - Paquete
- *      summary: Devuelve un array de paquete
+ *      summary: Devuelve un array de paquetes
  *      responses:
  *        '200':
  *          description: successful operation
@@ -85,7 +105,9 @@ const paqueteRouter = express.Router();
  *                    $ref: "#/components/schemas/paqueteGET"
  */
 
+
 paqueteRouter.get("/",[validarJwt], paqueteServices.getpaquete);
+
 
 /**
  * @openapi
@@ -119,6 +141,7 @@ paqueteRouter.get("/",[validarJwt], paqueteServices.getpaquete);
  *                    $ref: "#/components/schemas/paqueteGET"
  */
 paqueteRouter.post("/",[validarJwt], paqueteServices.postpaquete);
+
 
 /**
  * @openapi
@@ -157,6 +180,7 @@ paqueteRouter.post("/",[validarJwt], paqueteServices.postpaquete);
  */
 paqueteRouter.put("/:id",[validarJwt], paqueteServices.putpaquete);
 
+
 /**
  * @openapi
  * /paquete/{id}:
@@ -165,7 +189,7 @@ paqueteRouter.put("/:id",[validarJwt], paqueteServices.putpaquete);
 *        - bearerAuth: []
  *      tags:
  *        - Paquete
- *      summary: Borrar a un pasajero
+ *      summary: Inhabilitar un paquete
  *      parameters:
  *        - name: id
  *          description: Escribe el id del paquete
@@ -183,8 +207,9 @@ paqueteRouter.put("/:id",[validarJwt], paqueteServices.putpaquete);
  *                properties:
  *                  messagge:
  *                    type: String
- *                    example: El paquete fue eliminado.
+ *                    example: El paquete fue inhabilitado
  */
 paqueteRouter.delete("/:id",[validarJwt], paqueteServices.deletepaquete);
+
 
 export default paqueteRouter;
