@@ -1,10 +1,13 @@
 import infoCenterServices from "../services/infoCenter.service.js"
 
+
 async function getinfoCenter(req,res){
   try {
 
-    const rst = await infoCenterServices.getinfoCenter()
+
+    const rst = await infoCenterServices.getInfoCenter()
     return await res.json(rst)
+
 
   } catch (error) {
     res.status(404).json({
@@ -13,14 +16,33 @@ async function getinfoCenter(req,res){
   }
 }
 
+
+async function getinfoCenterClaims(req,res){
+  try {
+
+
+    const rst = await infoCenterServices.getInfoCenterClaims()
+    return await res.json(rst)
+
+
+  } catch (error) {
+    console.log(error)
+    res.status(404).json({
+      message:error
+    })
+  }
+}
+
+
 async function postinfoCenter(req,res){
   try {
-    
-    const rst = await infoCenterServices.postinfoCenter(req.body)
+   
+    const rst = await infoCenterServices.postInfoCenter(req.body)
     return await res.status(201).json({
       message:"Información registrada",
       data:rst
     })
+
 
   } catch (error) {
     res.status(400).json({
@@ -29,13 +51,15 @@ async function postinfoCenter(req,res){
   }
 }
 
+
 async function putinfoCenter(req,res){
   try {
     const id = req.params.id
-    await infoCenterServices.putinfoCenter(id,req.body)
+    await infoCenterServices.putInfoCenter(id,req.body)
     return await res.json({
-      message:"Info del Pasajero actualizada."
+      message:"Informacion actualizada."
     })
+
 
   } catch (error) {
     if(error.cause.status){
@@ -44,19 +68,22 @@ async function putinfoCenter(req,res){
       })
     }
 
+
     res.status(500).json({
       message:error
     })
   }
 }
 
+
 async function deleteinfoCenter(req,res){
   try {
     const id = req.params.id
-    await infoCenterServices.deleteinfoCenter(id)
+    await infoCenterServices.deleteInfoCenter(id)
     return await res.json({
       message:"La Info ha sido eliminado."
     })
+
 
   } catch (error) {
     console.log(error);
@@ -66,15 +93,18 @@ async function deleteinfoCenter(req,res){
       })
     }
 
+
     res.status(500).json({
       message:error
     })
   }
 }
 
+
 export default {
   getinfoCenter,
   postinfoCenter,
   putinfoCenter,
-  deleteinfoCenter
+  deleteinfoCenter,
+  getinfoCenterClaims
 }
