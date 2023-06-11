@@ -22,14 +22,6 @@ async function loginUser(email,passw){
 }
 
 async function registerUser(email,passw){
-  if(!email){
-    throw new BaseRequestException("email is obligatory")
-  }
-
-  if(!passw){
-    throw new BaseRequestException("A password is obligatory")
-  }
-
   const newUser ={
     email,
     password: await bcrypt.hash(passw, 10)

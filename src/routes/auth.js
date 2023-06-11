@@ -1,5 +1,7 @@
 import express from "express"
+import {query} from "express-validator"
 import loginController from "../controllers/auth.controller.js";
+import validateFields from "../middleware/validateField.js";
 
 const Router = express.Router()
 
@@ -56,7 +58,11 @@ const Router = express.Router()
 *                    example: Aqui te dara tu token.
 */
 
-Router.post("/login", loginController.loginUser)
+Router.post("/login",[
+  query("email","Email is obligatory.").notEmpty(),
+  query("password", "Password is obligatory").notEmpty(),
+  validateFields
+], loginController.loginUser)
 
 /**
  * @openapi
@@ -85,6 +91,10 @@ Router.post("/login", loginController.loginUser)
 *                    example: Usuario registrado.
 */
 
-Router.post("/register", loginController.registerUser)
+Router.post("/register",[
+  query("email","Email is obligatory.").notEmpty(),
+  query("password", "Password is obligatory").notEmpty(),
+  validateFields
+], loginController.registerUser)
 
 export default Router
