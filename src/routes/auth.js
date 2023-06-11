@@ -1,9 +1,12 @@
 import express from "express"
-import {query} from "express-validator"
+import {check} from "express-validator"
 import loginController from "../controllers/auth.controller.js";
 import validateFields from "../middleware/validateField.js";
 
+
 const Router = express.Router()
+
+
 
 
 /**
@@ -13,6 +16,7 @@ const Router = express.Router()
 *    description: Endpoints para verificar tu usuario y usaar todoso los servicios
 */
 
+
 /**
  * @openapi
  * components:
@@ -20,13 +24,14 @@ const Router = express.Router()
  *     creddentials:
  *       type: object
  *       properties:
- *         email: 
+ *         email:
  *           type: string
  *           example: correo@gmail.com
  *         password:
  *           type: String
  *           example: 12345M
  */
+
 
 /**
  * @openapi
@@ -58,11 +63,13 @@ const Router = express.Router()
 *                    example: Aqui te dara tu token.
 */
 
+
 Router.post("/login",[
-  query("email","Email is obligatory.").notEmpty(),
-  query("password", "Password is obligatory").notEmpty(),
+  check("email","Email is obligatory.").not().isEmpty(),
+  check("password", "Password is obligatory").not().isEmpty(),
   validateFields
 ], loginController.loginUser)
+
 
 /**
  * @openapi
@@ -91,10 +98,12 @@ Router.post("/login",[
 *                    example: Usuario registrado.
 */
 
+
 Router.post("/register",[
-  query("email","Email is obligatory.").notEmpty(),
-  query("password", "Password is obligatory").notEmpty(),
+  check("email","Email is obligatory.").not().isEmpty(),
+  check("password", "Password is obligatory").not().isEmpty(),
   validateFields
 ], loginController.registerUser)
+
 
 export default Router

@@ -1,6 +1,8 @@
 import loginServices from "../services/auth.service.js"
 
 
+
+
 async function loginUser(req,res){
   try {
     const {email,password} = req.body
@@ -10,6 +12,7 @@ async function loginUser(req,res){
       token:token
     })
 
+
   } catch (error) {
     console.log(error)
     if(error.cause.status){
@@ -18,11 +21,13 @@ async function loginUser(req,res){
       })
     }
 
+
     res.status(500).json({
       message:error
     })
   }
 }
+
 
 async function registerUser(req,res){
   try {
@@ -32,6 +37,7 @@ async function registerUser(req,res){
       message:"Usuario Registrado"
     })
 
+
   } catch (error) {
     console.log(error)
     if(error.cause.status){
@@ -40,11 +46,13 @@ async function registerUser(req,res){
       })
     }
 
+
     res.status(500).json({
       message:error
     })
   }
 }
+
 
 export default {
   loginUser,
