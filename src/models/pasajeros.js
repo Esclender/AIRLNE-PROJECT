@@ -5,19 +5,15 @@ const pasajeroSchema = mongoose.Schema({
     type:String,
     required: true
   },
-  LastName:{
+  lastName:{
     type:String,
     required: true
   },
-  Age:{
+  age:{
     type:Number,
     required: true
   },
-  Passport_N:{
-    type:String,
-    required: true
-  },
-  Destination:{
+  passport_N:{
     type:String,
     required: true
   }

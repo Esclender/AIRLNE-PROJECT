@@ -1,5 +1,6 @@
 import express from "express"
 import bookingServices from "../controllers/hotelReserva.controller.js";
+import validarJwt from "../middleware/validateJwt.js"
 
 const hotelRouter = express.Router()
 
@@ -70,7 +71,7 @@ const hotelRouter = express.Router()
 *                    $ref: "#/components/schemas/ReservasHotelesRE"
 */
 
-hotelRouter.get("/", bookingServices.getReservasHoteles)
+hotelRouter.get("/",[validarJwt], bookingServices.getReservasHoteles)
 
 /**
  * @openapi
@@ -101,7 +102,7 @@ hotelRouter.get("/", bookingServices.getReservasHoteles)
 *                    type: object
 *                    $ref: "#/components/schemas/ReservasHotelesRE"
 */
-hotelRouter.post("/reservas", bookingServices.postReservasHoteles)
+hotelRouter.post("/reservas",[validarJwt], bookingServices.postReservasHoteles)
 
 
 /**
@@ -137,7 +138,7 @@ hotelRouter.post("/reservas", bookingServices.postReservasHoteles)
 *                    type: String
 *                    example: Reserva actualizada
 */
-hotelRouter.put("/reservas/:id", bookingServices.putReservasHoteles)
+hotelRouter.put("/reservas/:id",[validarJwt], bookingServices.putReservasHoteles)
 
 /**
  * @openapi
@@ -165,6 +166,6 @@ hotelRouter.put("/reservas/:id", bookingServices.putReservasHoteles)
 *                    type: String
 *                    example: Reserva cancelada
 */
-hotelRouter.delete("/reservas/:id", bookingServices.deleteReservasHoteles)
+hotelRouter.delete("/reservas/:id",[validarJwt], bookingServices.deleteReservasHoteles)
 
 export default hotelRouter

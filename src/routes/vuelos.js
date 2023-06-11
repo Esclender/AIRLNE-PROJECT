@@ -1,7 +1,6 @@
-import mongoose from "mongoose";
 import express from "express"
-import db from "../database/project.module.js"
 import vuelosServices from "../controllers/vuelos.controller.js";
+import validarJwt from "../middleware/validateJwt.js";
 
 const vuelosRouter = express.Router()
 
@@ -12,6 +11,15 @@ const vuelosRouter = express.Router()
 *  - name: vuelos
 *    description: Endpoints para obtener todos los vuelos que esten disponibles para diferentes destinos.
 */
+
+/**
+* @openapi
+*components:
+*  securitySchemes:
+*    bearerAuth:            
+*      type: http
+*      scheme: bearer
+ */
 
 /**
  * @openapi
@@ -86,6 +94,8 @@ const vuelosRouter = express.Router()
  * @openapi
  * /vuelos:
 *    get:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - vuelos
 *      summary: Devuelve un array de vuelos
@@ -100,12 +110,14 @@ const vuelosRouter = express.Router()
 *                    $ref: "#/components/schemas/vuelosGET"
 */
 
-vuelosRouter.get("/", vuelosServices.getvuelos)
+vuelosRouter.get("/",[validarJwt], vuelosServices.getvuelos)
 
 /**
  * @openapi
  * /vuelos/{id}:
 *    get:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - vuelos
 *      summary: Obtener un vuelo en específico.
@@ -125,12 +137,14 @@ vuelosRouter.get("/", vuelosServices.getvuelos)
 *                $ref: "#/components/schemas/vuelosGET"
 */
 
-vuelosRouter.get("/:id", vuelosServices.getvuelosbyid)
+vuelosRouter.get("/:id",[validarJwt], vuelosServices.getvuelosbyid)
 
 /**
  * @openapi
  * /vuelos:
 *    post:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - vuelos
 *      summary: Crear un vuelo
@@ -156,13 +170,15 @@ vuelosRouter.get("/:id", vuelosServices.getvuelosbyid)
 *                    type: object
 *                    $ref: "#/components/schemas/vuelosGET"
 */
-vuelosRouter.post("/", vuelosServices.postvuelos)
+vuelosRouter.post("/",[validarJwt], vuelosServices.postvuelos)
 
 
 /**
  * @openapi
  * /vuelos/{id}:
 *    put:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - vuelos
 *      summary: Actualizar un vuelo.
@@ -192,12 +208,14 @@ vuelosRouter.post("/", vuelosServices.postvuelos)
 *                    type: String
 *                    example: Info del vuelo actualizada
 */
-vuelosRouter.put("/:id", vuelosServices.putvuelos)
+vuelosRouter.put("/:id",[validarJwt], vuelosServices.putvuelos)
 
 /**
  * @openapi
  * /vuelos/{id}:
 *    delete:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - vuelos
 *      summary: Borrar un vuelo
@@ -220,6 +238,6 @@ vuelosRouter.put("/:id", vuelosServices.putvuelos)
 *                    type: String
 *                    example: Vuelo cancelado
 */
-vuelosRouter.delete("/:id", vuelosServices.deletevuelos)
+vuelosRouter.delete("/:id",[validarJwt], vuelosServices.deletevuelos)
 
 export default vuelosRouter

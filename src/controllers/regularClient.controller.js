@@ -1,25 +1,24 @@
-import reservaVueloServices from "../services/reservaVuelos.service.js"
+import regularClientServices from "../services/regularClient.service.js"
 
-async function getReservaVuelos(req,res){
+async function getRegularClient(req,res){
   try {
 
-    const rst = await reservaVueloServices.getReservaVuelo()
+    const rst = await regularClientServices.getRegularClient()
     return await res.json(rst)
 
   } catch (error) {
-    console.log(error);
     res.status(404).json({
       message:error
     })
   }
 }
 
-async function postReservaVuelos(req,res){
+async function postRegularClient(req,res){
   try {
     
-    const rst = await reservaVueloServices.postReservaVuelo(req.body)
+    const rst = await regularClientServices.postRegularClient(req.body)
     return await res.status(201).json({
-      message:"Nueva reserva registrada",
+      message:"Cliente registrado",
       data:rst
     })
 
@@ -30,16 +29,15 @@ async function postReservaVuelos(req,res){
   }
 }
 
-async function putReservaVuelo(req,res){
+async function putRegularClient(req,res){
   try {
     const id = req.params.id
-    await reservaVueloServices.putReservaVuelo(id,req.body)
+    await regularClientServices.putRegularClient(id,req.body)
     return await res.json({
-      message:"la reserva ha sido actualizada."
+      message:"Info del Cliente actualizada."
     })
 
   } catch (error) {
-    console.log(error)
     if(error.cause.status){
       return res.status(error.cause.status).json({
         message:error.message
@@ -52,12 +50,12 @@ async function putReservaVuelo(req,res){
   }
 }
 
-async function deleteReservaVuelo(req,res){
+async function deleteRegularClient(req,res){
   try {
     const id = req.params.id
-    await reservaVueloServices.deleteReservaVuelo(id)
+    await regularClientServices.deleteRegularClient(id)
     return await res.json({
-      message:"La reserva ha sido cancelada."
+      message:"El Cliente ha sido sancionado."
     })
 
   } catch (error) {
@@ -74,10 +72,9 @@ async function deleteReservaVuelo(req,res){
   }
 }
 
-
 export default {
-  getReservaVuelos,
-  postReservaVuelos,
-  putReservaVuelo,
-  deleteReservaVuelo
+  getRegularClient,
+  postRegularClient,
+  putRegularClient,
+  deleteRegularClient
 }

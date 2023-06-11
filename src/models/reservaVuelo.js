@@ -1,17 +1,15 @@
 import mongoose from "mongoose";
+import pasajeroSchema from "./pasajeros.js"
+import vueloSchema from "./vuelos.js"
 
 const vueloReservaSchema = mongoose.Schema({
-    destination:{
-        type:String,
-        required: true
-    },
-    origin:{
-        type:String,
-        required: true
-    },
     passenger:{
-        type:String,
-        required: true
+      type: Object,
+      required: true
+    },
+    bookedFlie:{
+      type: Object,
+      required:true
     }
 })
 

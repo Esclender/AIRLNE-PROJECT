@@ -34,3 +34,5 @@ const infoCenter = mongoose.model("infocenters", infoCenterSchema)
 
 
 export default infoCenter
+
+
