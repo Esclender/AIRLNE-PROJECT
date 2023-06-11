@@ -1,7 +1,11 @@
 import express from "express"
 import infoCenterServices from "../controllers/infoCenter.controller.js";
+import validarJwt from "../middleware/validateJwt.js";
+
 
 const infoCenterRouter = express.Router()
+
+
 
 
 /**
@@ -11,6 +15,17 @@ const infoCenterRouter = express.Router()
 *    description: Endpoints para obtener todos los medios de comunicacion para la aerolinea.
 */
 
+
+/**
+* @openapi
+*components:
+*  securitySchemes:
+*    bearerAuth:            
+*      type: http
+*      scheme: bearer
+ */
+
+
 /**
  * @openapi
  * components:
@@ -18,19 +33,18 @@ const infoCenterRouter = express.Router()
  *     CentroInformativo:
  *       type: object
  *       properties:
- *         center: 
+ *         userData:
+ *           type: object
+ *           example: {"name":"Esclender", "lastname":"Lugo","prefix":"+51","contactNum":"928 590 695","email":"elesclenderlugo@gmail.com"}
+ *         comment:
  *           type: string
- *           example: Embarque
- *         description: 
- *           type: string
- *           example: Descubre qué necesitas en nuestro nuevo proceso de embarque por grupos…
- *         contacts: 
- *           items:
- *              type: string
- *           example:
- *             - "+56 928 590 695"
- *             - "+51 556 789 412"
+ *           example: Los comentarios que quieras dar acerca de tu reclamo
+ *         claimType:
+ *            type: string
+ *            example: Devolucion
  */
+
+
 
 
 /**
@@ -40,31 +54,32 @@ const infoCenterRouter = express.Router()
  *     CentroInformativoGET:
  *       type: object
  *       properties:
- *         center: 
+ *         userData:
+ *           type: object
+ *           example: {"name":"Esclender", "lastname":"Lugo","prefix":"+51","contactNum":"928 590 695","email":"elesclenderlugo@gmail.com"}
+ *         comment:
  *           type: string
- *           example: Embarque
- *         description: 
- *           type: string
- *           example: Descubre qué necesitas en nuestro nuevo proceso de embarque por grupos…
- *         contacts: 
- *           items:
- *              type: string
- *           example:
- *             - "+56 928 590 695"
- *             - "+51 556 789 412"
- *         id: 
+ *           example: Los comentarios que quieras dar acerca de tu reclamo
+ *         claimType:
+ *            type: string
+ *            example: Devolucion
+ *         id:
  *           type: string
  *           example: 6478b0eaa559cc7884a58952
  */
+
+
 
 
 /**
  * @openapi
  * /infoCenter:
 *    get:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - CentroInformativo
-*      summary: Devuelve un array de informacion
+*      summary: Devuelve un array con los reclamos regitrados.
 *      responses:
 *        '200':
 *          description: successful operation
@@ -76,17 +91,48 @@ const infoCenterRouter = express.Router()
 *                    $ref: "#/components/schemas/CentroInformativoGET"
 */
 
-infoCenterRouter.get("/", infoCenterServices.getinfoCenter)
+
+infoCenterRouter.get("/",[validarJwt], infoCenterServices.getinfoCenter)
+
+
+/**
+ * @openapi
+ * /infoCenter/claims:
+*    get:
+*      security:
+*        - bearerAuth: []
+*      tags:
+*        - CentroInformativo
+*      summary: Devuelve un array con todos los tipos de reclamos disponibles.
+*      responses:
+*        '200':
+*          description: successful operation
+*          content:
+*            application/json:
+*              schema:
+*               type: array
+*              example:
+*                - Devoluciones
+*                - Quejas
+*                - Embarque
+*                - Equipaje
+*/
+
+
+infoCenterRouter.get("/claims",[validarJwt], infoCenterServices.getinfoCenterClaims)
+
 
 /**
  * @openapi
  * /infoCenter:
 *    post:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - CentroInformativo
-*      summary: Agregar informacion
+*      summary: Agregar un reclamo
 *      requestBody:
-*        description: Los parametros {center,description,contacts} son OBLIGATORIOS
+*        description: Los parametros {userData,comment,claimnt} son OBLIGATORIOS, consulte la lista de reclamos que puede enviar
 *        content:
 *          application/json:
 *            schema:
@@ -107,19 +153,29 @@ infoCenterRouter.get("/", infoCenterServices.getinfoCenter)
 *                    type: object
 *                    $ref: "#/components/schemas/CentroInformativoGET"
 */
-infoCenterRouter.post("/", infoCenterServices.postinfoCenter)
+infoCenterRouter.post("/",[validarJwt], infoCenterServices.postinfoCenter)
+
+
 
 
 /**
  * @openapi
  * /infoCenter/{id}:
 *    put:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - CentroInformativo
-*      summary: Actualizar la informacion.
+*      summary: Actualizar un reclamo.
 *      parameters:
 *        - name: id
-*          description: Ingresa el id de la info a actualizar
+*          description: Ingresa el id del reclamo a actualizar
+*          in: path
+*          required: true
+*          schema:
+*            type: string
+*        - name: problems
+*          description: Campos a tomar en cuenta para los problemas a ingresar
 *          in: path
 *          required: true
 *          schema:
@@ -141,17 +197,20 @@ infoCenterRouter.post("/", infoCenterServices.postinfoCenter)
 *                properties:
 *                  messagge:
 *                    type: String
-*                    example: La Info fue actualizada.
+*                    example: El reclamo fue actualizado.
 */
-infoCenterRouter.put("/:id", infoCenterServices.putinfoCenter)
+infoCenterRouter.put("/:id",[validarJwt], infoCenterServices.putinfoCenter)
+
 
 /**
  * @openapi
  * /infoCenter/{id}:
 *    delete:
+*      security:
+*        - bearerAuth: []
 *      tags:
 *        - CentroInformativo
-*      summary: Borrar la informacion
+*      summary: Concluir un reclamo.
 *      parameters:
 *        - name: id
 *          description: Escribe el id de la info a eliminar.
@@ -169,8 +228,9 @@ infoCenterRouter.put("/:id", infoCenterServices.putinfoCenter)
 *                properties:
 *                  messagge:
 *                    type: String
-*                    example: La info ha sido eliminada.
+*                    example: El reclamo ha concluido.
 */
-infoCenterRouter.delete("/:id", infoCenterServices.deleteinfoCenter)
+infoCenterRouter.delete("/:id",[validarJwt], infoCenterServices.deleteinfoCenter)
+
 
 export default infoCenterRouter
