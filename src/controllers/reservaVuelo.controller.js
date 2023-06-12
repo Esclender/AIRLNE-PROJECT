@@ -1,10 +1,13 @@
 import reservaVueloServices from "../services/reservaVuelos.service.js"
 
+
 async function getReservaVuelos(req,res){
   try {
 
+
     const rst = await reservaVueloServices.getReservaVuelo()
     return await res.json(rst)
+
 
   } catch (error) {
     console.log(error);
@@ -14,21 +17,24 @@ async function getReservaVuelos(req,res){
   }
 }
 
+
 async function postReservaVuelos(req,res){
   try {
-    
     const rst = await reservaVueloServices.postReservaVuelo(req.body)
     return await res.status(201).json({
       message:"Nueva reserva registrada",
       data:rst
     })
 
+
   } catch (error) {
+    console.log(error)
     res.status(400).json({
       message:error
     })
   }
 }
+
 
 async function putReservaVuelo(req,res){
   try {
@@ -38,6 +44,7 @@ async function putReservaVuelo(req,res){
       message:"la reserva ha sido actualizada."
     })
 
+
   } catch (error) {
     console.log(error)
     if(error.cause.status){
@@ -46,11 +53,13 @@ async function putReservaVuelo(req,res){
       })
     }
 
+
     res.status(500).json({
       message:error
     })
   }
 }
+
 
 async function deleteReservaVuelo(req,res){
   try {
@@ -60,6 +69,7 @@ async function deleteReservaVuelo(req,res){
       message:"La reserva ha sido cancelada."
     })
 
+
   } catch (error) {
     console.log(error);
     if(error.cause.status){
@@ -68,11 +78,14 @@ async function deleteReservaVuelo(req,res){
       })
     }
 
+
     res.status(500).json({
       message:error
     })
   }
 }
+
+
 
 
 export default {
@@ -81,3 +94,5 @@ export default {
   putReservaVuelo,
   deleteReservaVuelo
 }
+
+
