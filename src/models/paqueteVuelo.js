@@ -1,9 +1,36 @@
 import mongoose from "mongoose";
 
+
 const paqueteVueloSchemas = mongoose.Schema({
   packageName:{
     type: String,
     required:true
+  },
+  origin: {
+    type: String,
+    required: true,
+  },
+  destination: {
+    type: String,
+    required: true,
+  },
+  avaibleDates:{
+    since:{
+      type: Date,
+      required: true
+    },
+    to:{
+      type: Date,
+      required: true
+    }
+  },
+  endingDate:{
+    type: Date,
+    required: true
+  },
+  status:{
+    type: Boolean,
+    required: true
   },
   avaibleHotels: {
     type: Array,
@@ -15,6 +42,7 @@ const paqueteVueloSchemas = mongoose.Schema({
   }
 });
 
+
 paqueteVueloSchemas.methods = {
   toJson: (schema) => {
     const { __v, _id, ...info } = schema.toObject();
@@ -23,6 +51,8 @@ paqueteVueloSchemas.methods = {
   },
 };
 
+
 const paquete = mongoose.model("paquetevuelos", paqueteVueloSchemas);
+
 
 export default paquete;

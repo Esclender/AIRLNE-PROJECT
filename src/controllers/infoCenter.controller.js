@@ -1,10 +1,13 @@
 import infoCenterServices from "../services/infoCenter.service.js"
 
+
 async function getinfoCenter(req,res){
   try {
 
+
     const rst = await infoCenterServices.getInfoCenter()
     return await res.json(rst)
+
 
   } catch (error) {
     res.status(404).json({
@@ -13,14 +16,32 @@ async function getinfoCenter(req,res){
   }
 }
 
+
+async function getinfoCenterClaims(req,res){
+  try {
+
+
+    const rst = await infoCenterServices.getInfoCenterClaims()
+    return await res.json(rst)
+
+
+  } catch (error) {
+    res.status(404).json({
+      message:error
+    })
+  }
+}
+
+
 async function postinfoCenter(req,res){
   try {
-    
+   
     const rst = await infoCenterServices.postInfoCenter(req.body)
     return await res.status(201).json({
       message:"Información registrada",
       data:rst
     })
+
 
   } catch (error) {
     res.status(400).json({
@@ -28,6 +49,7 @@ async function postinfoCenter(req,res){
     })
   }
 }
+
 
 async function putinfoCenter(req,res){
   try {
@@ -37,6 +59,7 @@ async function putinfoCenter(req,res){
       message:"Informacion actualizada."
     })
 
+
   } catch (error) {
     if(error.cause.status){
       return res.status(error.cause.status).json({
@@ -44,11 +67,13 @@ async function putinfoCenter(req,res){
       })
     }
 
+
     res.status(500).json({
       message:error
     })
   }
 }
+
 
 async function deleteinfoCenter(req,res){
   try {
@@ -58,6 +83,7 @@ async function deleteinfoCenter(req,res){
       message:"La Info ha sido eliminado."
     })
 
+
   } catch (error) {
     console.log(error);
     if(error.cause.status){
@@ -66,15 +92,20 @@ async function deleteinfoCenter(req,res){
       })
     }
 
+
     res.status(500).json({
       message:error
     })
   }
 }
 
+
 export default {
   getinfoCenter,
   postinfoCenter,
   putinfoCenter,
-  deleteinfoCenter
+  deleteinfoCenter,
+  getinfoCenterClaims
 }
+
+

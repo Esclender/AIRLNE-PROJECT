@@ -21,7 +21,6 @@ async function verifyJwt(req,res,next) {
         message:"The client token is not valid. Check that you have an account"
       })
     }
-  
 
     req.authenticatedUser = {
       ...req.authenticatedUser,
