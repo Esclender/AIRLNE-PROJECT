@@ -38,7 +38,7 @@ async function postvuelos(req,res){
     
     const rst = await vuelosServices.postVuelos(req.body)
     return await res.status(201).json({
-      message:"Vuelo creado",
+      message:"Vuelo Registrado",
       data:rst
     })
 

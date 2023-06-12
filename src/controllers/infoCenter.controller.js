@@ -38,7 +38,7 @@ async function postinfoCenter(req,res){
    
     const rst = await infoCenterServices.postInfoCenter(req.body)
     return await res.status(201).json({
-      message:"Información registrada",
+      message:"Reclamo registrado",
       data:rst
     })
 
@@ -56,7 +56,7 @@ async function putinfoCenter(req,res){
     const id = req.params.id
     await infoCenterServices.putInfoCenter(id,req.body)
     return await res.json({
-      message:"Informacion actualizada."
+      message:"El reclamo fue actualizado."
     })
 
 
@@ -80,7 +80,7 @@ async function deleteinfoCenter(req,res){
     const id = req.params.id
     await infoCenterServices.deleteInfoCenter(id)
     return await res.json({
-      message:"La Info ha sido eliminado."
+      message:"El reclamo ha concluido."
     })
 
 

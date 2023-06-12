@@ -118,7 +118,7 @@ const regularClienteRouter = express.Router()
 *        - bearerAuth: []
 *      tags:
 *        - ClienteFrecuente
-*      summary: Agregar un cliente
+*      summary: Registrar un cliente
 *      requestBody:
 *        description: Los parametros {names,lastnames,birthday,document,documentType,email,password } son OBLIGATORIOS
 *        content:

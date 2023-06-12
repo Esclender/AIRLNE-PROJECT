@@ -43,7 +43,7 @@ async function putpaquete(req, res) {
     const id = req.params.id;
     await paqueteServices.putPaquete(id, req.body);
     return await res.json({
-      message: "Info del paquete actualizado.",
+      message: "Info del paquete actualizada.",
     });
   } catch (error) {
     console.log(error)
@@ -66,7 +66,7 @@ async function deletepaquete(req, res) {
     const id = req.params.id;
     await paqueteServices.deletePaquete(id);
     return await res.json({
-      message: "Paquete fue eliminado.",
+      message: "El Paquete ha sido inhabilitado",
     });
   } catch (error) {
     console.log(error);

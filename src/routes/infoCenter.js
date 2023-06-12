@@ -130,7 +130,7 @@ infoCenterRouter.get("/claims",[validarJwt], infoCenterServices.getinfoCenterCla
 *        - bearerAuth: []
 *      tags:
 *        - CentroInformativo
-*      summary: Agregar un reclamo
+*      summary: Registrar un reclamo
 *      requestBody:
 *        description: Los parametros {userData,comment,claimnt} son OBLIGATORIOS, consulte la lista de reclamos que puede enviar
 *        content:
@@ -148,7 +148,7 @@ infoCenterRouter.get("/claims",[validarJwt], infoCenterServices.getinfoCenterCla
 *                properties:
 *                  messagge:
 *                    type: String
-*                    example: Informacion registrada.
+*                    example: Reclamo registrado.
 *                  data:
 *                    type: object
 *                    $ref: "#/components/schemas/CentroInformativoGET"

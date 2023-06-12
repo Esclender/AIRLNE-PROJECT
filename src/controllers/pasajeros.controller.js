@@ -55,7 +55,7 @@ async function deletepasajero(req,res){
     const id = req.params.id
     await pasajerosServices.deletePasajeros(id)
     return await res.json({
-      message:"El pasajero ha cancelado su vuelo."
+      message:"El pasajero ha sido inhabilitado."
     })
 
   } catch (error) {

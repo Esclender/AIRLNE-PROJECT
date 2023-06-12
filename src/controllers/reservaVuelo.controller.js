@@ -41,7 +41,7 @@ async function putReservaVuelo(req,res){
     const id = req.params.id
     await reservaVueloServices.putReservaVuelo(id,req.body)
     return await res.json({
-      message:"la reserva ha sido actualizada."
+      message:"La reserva ha sido actualizada."
     })
 
 

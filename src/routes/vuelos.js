@@ -147,7 +147,7 @@ vuelosRouter.get("/:id",[validarJwt], vuelosServices.getvuelosbyid)
 *        - bearerAuth: []
 *      tags:
 *        - vuelos
-*      summary: Crear un vuelo
+*      summary: Registrar un vuelo
 *      requestBody:
 *        description: Los parametros {destino,origen,tarifa, llegada, Salida} son OBLIGATORIOS
 *        content:
@@ -165,7 +165,7 @@ vuelosRouter.get("/:id",[validarJwt], vuelosServices.getvuelosbyid)
 *                properties:
 *                  messagge:
 *                    type: String
-*                    example: Vuelo Creado
+*                    example: Vuelo Registrado.
 *                  data:
 *                    type: object
 *                    $ref: "#/components/schemas/vuelosGET"
@@ -181,7 +181,7 @@ vuelosRouter.post("/",[validarJwt], vuelosServices.postvuelos)
 *        - bearerAuth: []
 *      tags:
 *        - vuelos
-*      summary: Actualizar un vuelo.
+*      summary: Actualizar info de un vuelo.
 *      parameters:
 *        - name: id
 *          description: Ingresa el id del vuelo

@@ -76,7 +76,7 @@ const pasajeroRouter = express.Router()
 *        - bearerAuth: []
 *      tags:
 *        - pasajero
-*      summary: Devuelve un array de pasajeros
+*      summary: Devuelve un array de pasajeros registrados.
 *      responses:
 *        '200':
 *          description: successful operation
@@ -98,7 +98,7 @@ pasajeroRouter.get("/",[validarJwt], pasajeroServices.getpasajero)
 *        - bearerAuth: []
 *      tags:
 *        - pasajero
-*      summary: Agregar un pasajero
+*      summary: Registrar un pasajero
 *      requestBody:
 *        description: Los parametros {name,LastName,Age, passport_N} son OBLIGATORIOS
 *        content:
@@ -132,7 +132,7 @@ pasajeroRouter.post("/",[validarJwt], pasajeroServices.postpasajero)
 *        - bearerAuth: []
 *      tags:
 *        - pasajero
-*      summary: Actualizar a un pasajero.
+*      summary: Actualizar la info de un pasajero.
 *      parameters:
 *        - name: id
 *          description: Ingresa el id del pasajero
@@ -169,7 +169,7 @@ pasajeroRouter.put("/:id",[validarJwt], pasajeroServices.putpasajero)
 *        - bearerAuth: []
 *      tags:
 *        - pasajero
-*      summary: Borrar a un pasajero
+*      summary: Inhabilitar a un pasajero
 *      parameters:
 *        - name: id
 *          description: Escribe el id del pasajero
@@ -187,7 +187,7 @@ pasajeroRouter.put("/:id",[validarJwt], pasajeroServices.putpasajero)
 *                properties:
 *                  messagge:
 *                    type: String
-*                    example: El pasajero ha cancelado su vuelo.
+*                    example: El pasajero ha sido inhabilitado.
 */
 pasajeroRouter.delete("/:id",[validarJwt], pasajeroServices.deletepasajero)
 

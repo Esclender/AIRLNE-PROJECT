@@ -92,7 +92,7 @@ hotelRouter.get("/",[validarJwt], bookingServices.getReservasHoteles)
 *        - bearerAuth: []
 *      tags:
 *        - ReservaDeHoteles
-*      summary: Crear una reserva de hotel
+*      summary: Registrar un nuevo Hotel
 *      requestBody:
 *        description: Los parametros {nombreHotel,calificacion,ciudad} son OBLIGATORIOS
 *        content:
@@ -110,7 +110,7 @@ hotelRouter.get("/",[validarJwt], bookingServices.getReservasHoteles)
 *                properties:
 *                  messagge:
 *                    type: String
-*                    example: Reserva resgistrada
+*                    example: Hotel resgistrado
 *                  data:
 *                    type: object
 *                    $ref: "#/components/schemas/ReservasHotelesRE"
@@ -126,7 +126,7 @@ hotelRouter.post("/reservas",[validarJwt], bookingServices.postReservasHoteles)
 *        - bearerAuth: []
 *      tags:
 *        - ReservaDeHoteles
-*      summary: Actualizar una reserva de hotel.
+*      summary: Actualizar la info de un hotel.
 *      parameters:
 *        - name: id
 *          description: Ingresa el id de la reserva
@@ -151,7 +151,7 @@ hotelRouter.post("/reservas",[validarJwt], bookingServices.postReservasHoteles)
 *                properties:
 *                  messagge:
 *                    type: String
-*                    example: Reserva actualizada
+*                    example: La info del hotel se ha actualizado.
 */
 hotelRouter.put("/reservas/:id",[validarJwt], bookingServices.putReservasHoteles)
 
@@ -163,7 +163,7 @@ hotelRouter.put("/reservas/:id",[validarJwt], bookingServices.putReservasHoteles
 *        - bearerAuth: []
 *      tags:
 *        - ReservaDeHoteles
-*      summary: Borrar una reserva
+*      summary: Inhabiblitar un hotel
 *      parameters:
 *        - name: id
 *          description: Escribe el id de la reserva
@@ -181,7 +181,7 @@ hotelRouter.put("/reservas/:id",[validarJwt], bookingServices.putReservasHoteles
 *                properties:
 *                  messagge:
 *                    type: String
-*                    example: Reserva cancelada
+*                    example: Hotel inhabilitado.
 */
 hotelRouter.delete("/reservas/:id",[validarJwt], bookingServices.deleteReservasHoteles)
 

@@ -87,7 +87,7 @@ reservasVuelosRouter.get("/",[validarJwt], reservasVuelosControllers.getReservaV
 *        - bearerAuth: []
 *      tags:
 *        - ReservaDeVuelos
-*      summary: Agregar una nueva reserva.
+*      summary: Registrar una nueva reserva.
 *      requestBody:
 *        description: Para registrar una reserva se debe enviar los datos del pasajero y el vuelo a reservar.
 *        content:
@@ -153,7 +153,7 @@ reservasVuelosRouter.post("/",[validarJwt], reservasVuelosControllers.postReserv
 *            application/json:
 *              schema:
 *               type: object
-*               example: Reserva actualizada
+*               example: La reserva ha sido actualizada.
 */
 reservasVuelosRouter.put("/:id",[validarJwt], reservasVuelosControllers.putReservaVuelo)
 
@@ -180,7 +180,7 @@ reservasVuelosRouter.put("/:id",[validarJwt], reservasVuelosControllers.putReser
 *            application/json:
 *              schema:
 *               type: object
-*               example: Reserva eliminado
+*               example: La reserva ha sido cancelada.
 */
 reservasVuelosRouter.delete("/:id",[validarJwt], reservasVuelosControllers.deleteReservaVuelo)
 
