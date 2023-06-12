@@ -4,8 +4,11 @@ import vueloSchema from "../models/vuelos.js"
 import db from "../database/project.module.js"
 
 
+
+
 const model = new db(reservaVueloSchema)
 const modelVuelo = new db(vueloSchema)
+
 
 async function getReservaVuelo(){
   const rst = await model.get()
@@ -13,34 +16,21 @@ async function getReservaVuelo(){
   return await mapped
 }
 
+
 async function postReservaVuelo(body){
-  const {passengerPassportN, bookedFlieId} = body
-  const isNull = passengerPassportN == undefined || bookedFlieId == undefined
-
-  const rstBody = {
-    passenger: null,
-    bookedFlie: null
-  }
-
-  rstBody.passenger = await passengerSchema.find({passport_N:passengerPassportN})
-  rstBody.bookedFlie = await modelVuelo.get(bookedFlieId)
-
-  rstBody.passenger =  rstBody.passenger[0]
-
-  const rst = await model.post(rstBody)
+  const rst = await model.post(body)
   return await rst.toJson(rst)
 }
 
+
 async function putReservaVuelo(id, body){
-  let {bookedFlieId} = body
-  const isNull = bookedFlieId == undefined
-
-  bookedFlieId = await modelVuelo.get(bookedFlieId)
-
-  const rst = await model.put(id,{bookedFlie: bookedFlieId})
+  let {bookedFlie} = body
+  const rst = await model.put(id,{bookedFlie})
   if(!rst.modifiedCount) throw new BaseException("Reserva not found", 404);
   return rst
 }
+
+
 
 
 async function deleteReservaVuelo(id){
@@ -49,9 +39,12 @@ async function deleteReservaVuelo(id){
   return rst
 }
 
+
 export default {
   getReservaVuelo,
   postReservaVuelo,
   putReservaVuelo,
   deleteReservaVuelo
 }
+
+
