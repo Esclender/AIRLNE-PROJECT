@@ -218,7 +218,7 @@ vuelosRouter.put("/:id",[validarJwt], vuelosServices.putvuelos)
 *        - bearerAuth: []
 *      tags:
 *        - vuelos
-*      summary: Borrar un vuelo
+*      summary: Cancelar un vuelo
 *      parameters:
 *        - name: id
 *          description: Escribe el id del vuelo

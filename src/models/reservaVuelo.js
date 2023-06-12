@@ -2,20 +2,20 @@ import mongoose from "mongoose";
 
 
 const vueloReservaSchema = mongoose.Schema({
-    passenger:{
-      name:{
+    passengerData:{
+      names:{
         type:String,
         required: true
       },
-      lastName:{
+      lastNames:{
         type:String,
         required: true
       },
-      age:{
-        type:Number,
+      documentType:{
+        type:String,
         required: true
       },
-      passport_N:{
+      document:{
         type:String,
         required: true
       }
@@ -27,10 +27,6 @@ const vueloReservaSchema = mongoose.Schema({
       },
       origin:{
         type:String,
-        required: true
-      },
-      roundtrip:{
-        type:Boolean,
         required: true
       },
       aboarding:{
@@ -49,10 +45,6 @@ const vueloReservaSchema = mongoose.Schema({
         type:Date,
         required: true
       }
-    },
-    aboardingDate:{
-      type:Date,
-      required: true
     }
 }, { timestamps: true })
 

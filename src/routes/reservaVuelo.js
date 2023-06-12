@@ -31,10 +31,10 @@ const reservasVuelosRouter = express.Router()
  *       properties:
  *         passenger:
  *            type: object
- *            $ref: "#/components/schemas/pasajeroGET"
+ *            example: {"names": "Esclender Antonio", "lastNames":"Lugo Silva", "documentType":"DNI", "document":4008712}
  *         bookedFlie:
  *           type: object
- *           $ref: "#/components/schemas/vuelosGET"
+ *           example: {"destination": "Argentina","origin":"Peru","currency":"USD","price":"600", "arrival":"2023-06-02T12:30:00Z", "aboarding":"2023-06-01T10:30:00Z" }
  *         id:
  *           type: string
  *           example: 6478b0eaa559cc7884a58952
@@ -50,10 +50,10 @@ const reservasVuelosRouter = express.Router()
  *       properties:
  *         passenger:
  *            type: object
- *            $ref: "#/components/schemas/pasajeroGET"
+ *            example: {"names": "Esclender Antonio", "lastNames":"Lugo Silva", "documentType":"DNI", "document":4008712}
  *         bookedFlie:
  *           type: object
- *           $ref: "#/components/schemas/vuelosGET"
+ *           example: {"destination": "Argentina","origin":"Peru","currency":"USD","price":"600", "arrival":"2023-06-02T12:30:00Z", "aboarding":"2023-06-01T10:30:00Z" }
  */
 
 
@@ -89,19 +89,18 @@ reservasVuelosRouter.get("/",[validarJwt], reservasVuelosControllers.getReservaV
 *        - ReservaDeVuelos
 *      summary: Agregar una nueva reserva.
 *      requestBody:
-*        description: Para crear uan reserva se debe enviar el Nummero de pasaporte del pasajero y el id del vuelo reservado.
+*        description: Para registrar una reserva se debe enviar los datos del pasajero y el vuelo a reservar.
 *        content:
 *          application/json:
 *            schema:
 *              type: object
 *              properties:
-*                passengerPassportN:
-*                  type: string
-*                bookedFlieId:
-*                  type: string
-*              example:
-*                passengerPassportN: ZAB000254
-*                bookedFlieId: 6478b0eaa559cc7884a58952
+*                passengerData:
+*                  type: object
+*                  example: {"names": "Esclender Antonio", "lastNames":"Lugo Silva", "documentType":"DNI", "document":4008712}
+*                bookedFlie:
+*                  type: object
+*                  example: {"destination": "Argentina","origin":"Peru","currency":"USD","price":"600", "arrival":"2023-06-02T12:30:00Z", "aboarding":"2023-06-01T10:30:00Z" }
 *        required: true
 *      responses:
 *        '200':
@@ -143,10 +142,9 @@ reservasVuelosRouter.post("/",[validarJwt], reservasVuelosControllers.postReserv
 *            schema:
 *              type: object
 *              properties:
-*                bookedFlieId:
-*                  type: string
-*              example:
-*                bookedFlieId: 6478b0eaa559cc7884a58952
+*                bookedFlie:
+*                  type: object
+*                  example: {"destination": "Argentina","origin":"Peru","currency":"USD","price":"600", "arrival":"2023-06-02T12:30:00Z", "aboarding":"2023-06-01T10:30:00Z" }
 *        required: true
 *      responses:
 *        '200':
@@ -167,7 +165,7 @@ reservasVuelosRouter.put("/:id",[validarJwt], reservasVuelosControllers.putReser
 *        - bearerAuth: []
 *      tags:
 *        - ReservaDeVuelos
-*      summary: Actualizar una reserva, solo se podra modificar el vuelo de un pasajero que ya tenga una reserva.
+*      summary: Cancelar una reserva.
 *      parameters:
 *        - name: id
 *          description: Ingresa el id de la reserva.

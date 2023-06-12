@@ -6,9 +6,6 @@ import validateFields from "../middleware/validateField.js";
 
 const Router = express.Router()
 
-
-
-
 /**
 * @openapi
 * tags:

@@ -20,11 +20,8 @@ class db {
     return newReserva.save()
   }
 
-  put(id,body,meth,field){
-    let updateReserva
-    const isNull = meth == null && field == null
-    if(isNull){
-      updateReserva = this.data.updateOne(
+  put(id,body){
+    let updateReserva = this.data.updateOne(
         {
           "_id":`${id}`
         },
@@ -34,7 +31,6 @@ class db {
             }
         }
       )
-    }
 
     return updateReserva
   }

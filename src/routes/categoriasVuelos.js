@@ -96,7 +96,7 @@ const fieldsToValidate = (req, res) => {
 *        - bearerAuth: []
 *      tags:
 *        - CategoriasDeVuelos
-*      summary: Devuelve un array de todas las categorías actuales
+*      summary: Devuelve un array de todas las categorías de vuelo actuales
 *      responses:
 *        '200':
 *          description: successful operation
@@ -118,7 +118,7 @@ categoriasVuelosRuter.get("/",[validarJwt], categoriasVservices.getcategoriasVue
 *        - bearerAuth: []
 *      tags:
 *        - CategoriasDeVuelos
-*      summary: Añadir una nueva categoria
+*      summary: Registrar una nueva categoria
 *      requestBody:
 *        description: Los parametros {beneficies,categoryName,price,currency} son OBLIGATORIOS
 *        content:
@@ -136,7 +136,7 @@ categoriasVuelosRuter.get("/",[validarJwt], categoriasVservices.getcategoriasVue
 *                properties:
 *                  messagge:
 *                    type: String
-*                    example: Categoria creada
+*                    example: Categoria registrada
 *                  data:
 *                    type: object
 *                    $ref: "#/components/schemas/categoriasVuelosGET"
@@ -152,7 +152,7 @@ categoriasVuelosRuter.post("/",[validarJwt], categoriasVservices.postcategoriasV
 *        - bearerAuth: []
 *      tags: 
 *        - CategoriasDeVuelos
-*      summary: Actualizar una categoria.
+*      summary: Actualizar informacion de una categoria.
 *      parameters:
 *        - name: id
 *          description: Ingresa el id de la categoria
@@ -177,7 +177,7 @@ categoriasVuelosRuter.post("/",[validarJwt], categoriasVservices.postcategoriasV
 *                properties:
 *                  messagge:
 *                    type: String
-*                    example: Categoria actualizada
+*                    example: Info de la categoria actualizada.
 */
 categoriasVuelosRuter.put("/:id",[validarJwt], categoriasVservices.putcategoriasVuelos)
 
@@ -189,7 +189,7 @@ categoriasVuelosRuter.put("/:id",[validarJwt], categoriasVservices.putcategorias
 *        - bearerAuth: []
 *      tags:
 *        - CategoriasDeVuelos
-*      summary: Borrar una categoria de vuelo
+*      summary: Inhabilitar una categoria de vuelo
 *      parameters:
 *        - name: id
 *          description: Escribe el ID de la categoría a escoger
@@ -207,7 +207,7 @@ categoriasVuelosRuter.put("/:id",[validarJwt], categoriasVservices.putcategorias
 *                properties:
 *                  messagge:
 *                    type: String
-*                    example: Categoria eliminada
+*                    example: Categoria Inhabilitada
 */
 categoriasVuelosRuter.delete("/:id",[validarJwt], categoriasVservices.deletecategoriasVuelos)
 

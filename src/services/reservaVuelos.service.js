@@ -1,13 +1,7 @@
 import reservaVueloSchema from "../models/reservaVuelo.js"
-import passengerSchema from "../models/pasajeros.js"
-import vueloSchema from "../models/vuelos.js"
 import db from "../database/project.module.js"
 
-
-
-
 const model = new db(reservaVueloSchema)
-const modelVuelo = new db(vueloSchema)
 
 
 async function getReservaVuelo(){
@@ -29,9 +23,6 @@ async function putReservaVuelo(id, body){
   if(!rst.modifiedCount) throw new BaseException("Reserva not found", 404);
   return rst
 }
-
-
-
 
 async function deleteReservaVuelo(id){
   const rst = await model.delete(id)

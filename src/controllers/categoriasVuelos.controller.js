@@ -15,7 +15,7 @@ async function postcategoriasVuelos(req, res) {
   try {
     const rst = await categoriasVServices.postCategoriasVuelos(req.body);
     return await res.status(201).json({
-      message: "Categoria creada",
+      message: "Categoria registrada",
       data: rst,
     });
   } catch (error) {
@@ -30,7 +30,7 @@ async function putcategoriasVuelos(req, res) {
     const id = req.params.id;
     await categoriasVServices.putCategoriasVuelos(id, req.body);
     return await res.json({
-      message: "Categoria actualizada",
+      message: "Info de la categoria actualizada.",
     });
   } catch (error) {
     console.log(error);
@@ -51,7 +51,7 @@ async function deletecategoriasVuelos(req, res) {
     const id = req.params.id;
     await categoriasVServices.deleteCategoriasVuelos(id);
     return await res.json({
-      message: "Categoria eliminada",
+      message: "Categoria Inhabilitada",
     });
   } catch (error) {
     if (error.cause.status) {
