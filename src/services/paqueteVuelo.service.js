@@ -80,6 +80,7 @@ async function putPaquete(id, body) {
 
 
   const rst = await model.put(id, updatedPack);
+  console.log(rst)
   if (!rst.modifiedCount) throw new BaseException("Paquete not found", 404);
   return rst;
 }
@@ -98,3 +99,7 @@ export default {
   putPaquete,
   deletePaquete,
 };
+
+
+
+
