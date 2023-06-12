@@ -22,7 +22,6 @@ async function verifyJwt(req,res,next) {
       })
     }
 
-
     req.authenticatedUser = {
       ...req.authenticatedUser,
       client:user
